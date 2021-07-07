@@ -1,0 +1,14 @@
+/*
+    共通
+*/
+.account-content {
+    padding-top: 32px;
+    .account-content-item {
+        &.content-item-wrap {
+            padding: 0 16px;
+        }
+        .content-item-wrap {
+            padding: 0 16px;
+        }
+    }
+}

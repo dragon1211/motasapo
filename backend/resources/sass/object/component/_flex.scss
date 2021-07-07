@@ -1,0 +1,74 @@
+
+.c-flex {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.c-flex__sp {
+    @include mq_down(md) {
+        display:-webkit-box;
+        display:-ms-flexbox;
+        display:flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+}
+.c-flex__pc {
+    @include mq_up(md) {
+        display:-webkit-box;
+        display:-ms-flexbox;
+        display:flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+}
+.c-flex, .c-flex__sp, .c-flex__pc {
+    &.v-center {
+        // 高さ：中央揃え
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    &.v-top {
+        // 高さ：上揃え
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+    &.v-center__sp {
+        @include mq_down(md) {
+            // 高さ：中央揃え
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+    }
+    &.v-center__pc {
+        @include mq_up(md) {
+            // 高さ：中央揃え
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+    }
+    &.h-center {
+        // 横：中央揃え
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+    &.h-between {
+        // 横：左右揃え
+        -webkit-box-pack: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+    &.h-left {
+        // 横：左寄せ
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+}

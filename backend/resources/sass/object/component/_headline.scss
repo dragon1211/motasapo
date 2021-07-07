@@ -1,0 +1,177 @@
+.c-headline__small {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+// /* h1タグ：固定ページの見出し */
+// .c-headline--page {
+//     font-size: 24px;
+//     margin-top: 28px;
+//     margin-bottom: 18px;
+//     @include mq_up(md) {
+//         font-size: 28px;
+//         margin-top: 32px;
+//         margin-bottom: 22px;
+//     }
+//     &:after {
+//         content: "";
+//         display: block;
+//         width: 33px;
+//         height: 2px;
+//         background: #FF7272;
+//         border-radius: 3px;
+//         margin-top: 5px;
+//     }
+// }
+
+// /* h2：一覧の見出し */
+// .c-headline--content {
+//     position: relative;
+//     margin-bottom: 14px;
+//     @include mq_up(md) {
+//         margin-bottom: 18px;
+//     }
+//     @include mq_down(md) {
+//         padding: 0 15px;
+//     }
+//     .title {
+//         font-size: 20px;
+//         font-weight: 700;
+//         @include mq_up(md) {
+//             font-size: 24px;
+//         }
+//     }
+//     .sub {
+//         font-size: 10px;
+//         margin-bottom: 3px;
+//         color: $colorGray;
+//         @include mq_up(md) {
+//             font-size: 12px;
+//             margin-bottom: 5px;
+//         }
+//     }
+//     & > .link {
+//         position: relative;
+//         display: block;
+//         width: 150px;
+//         height: 35px;
+//         line-height: 35px;
+//         text-align: center;
+//         font-weight: 700;
+//         border-radius: 20px;
+//         transition: .2s;
+//         color: #fff;
+//         background: #FF7272;
+//         &:before {
+//             content: "";
+//             display: block;
+//             position: absolute;
+//             right: 10px;
+//             top: 50%;
+//             width: 15px;
+//             height: 15px;
+//             -webkit-transform: translateY(-50%);
+//             transform: translateY(-50%);
+//         }
+//         &:hover {
+//             opacity: .5;
+//         }
+//         @include mq_down(md) {
+//             display: none;
+//         }
+//     }
+// }
+
+// /* h2：サイドバー */
+// .c-headline--sidebar {
+//     margin-bottom: 16px;
+//     @include mq_up(md) {
+//         margin-bottom: 18px;
+//     }
+//     .title {
+//         font-size: 18px;
+//         position: relative;
+//         text-align: center;
+//         padding: 0 25px;
+//         font-weight: 700;
+//         @include mq_up(md) {
+//         }
+//         &:before, &:after {
+//             position: absolute;
+//             content: "";
+//             display: block;
+//             width: 20px;
+//             height: 2px;
+//             background: #111111;
+//             top: 50%;
+//             -webkit-transform: translateY(-50%);
+//             transform: translateY(-50%);
+//         }
+//         &:before {
+//             left: 15px;
+//             @include mq_up(md) {
+//                 left: 0;
+//             }
+//         }
+//         &:after {
+//             right: 15px;
+//             @include mq_up(md) {
+//                 right: 0;
+//             }
+//         }
+//     }
+// }
+
+// .c-headline--content__image {
+//     margin-top: 20px;
+// }
+// .c-headline--content__add {
+//     width: 100%;
+//     margin-top: 20px;
+//     a {
+//         position: relative;
+//         width: 100%;
+//         padding: 15px 20px;
+//         background: #fffcf5;
+//         color: #834b33;
+//         border: 1px solid #FFDED9;
+//         border-radius: 3px;
+//         transition: .2s;
+//         @include mq_up(md) {
+//             padding: 20px 30px;
+//         }
+//         &:before {
+//             content: "";
+//             display: block;
+//             width: 12px;
+//             height: 12px;
+//             position: absolute;
+//             right: 10px;
+//             top: 50%;
+//             -webkit-transform: translateY(-50%);
+//             transform: translateY(-50%);
+//             @include mq_up(md) {
+//                 width: 20px;
+//                 height: 20px;
+//             }
+//         }
+//         &:hover {
+//             opacity: .5;
+//         }
+//         p {
+//             width: 100%;
+//             text-align: center;
+//         }
+//         .sub {
+//             color: #834b33;
+//         }
+//         .main {
+//             font-weight: 700;
+//             font-size: 18px;
+//             @include mq_up(md) {
+//                 font-size: 20px;
+//             }
+//         }
+//     }
+// }

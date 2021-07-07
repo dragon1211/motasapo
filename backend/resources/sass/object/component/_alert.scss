@@ -1,0 +1,36 @@
+/*
+    モーダルエラー
+*/
+.alert {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px 16px;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    // duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name
+    animation: .5s ease-out 1.8s 1 normal forwards running fadeOut;
+}
+.alert-danger {
+    @extend .alert;
+    background: rgba(175, 6, 6, .95);
+}
+.alert-success {
+    @extend .alert;
+    background: rgba(46, 153, 232, .95);
+}
+
+/*
+    テキストエラー
+*/
+.l-alert__text--red {
+    display: block;
+    margin-top: 8px;
+    width: 100%;
+    padding: 8px;
+    color: #ff4747;
+    background: #ffeaea;
+}

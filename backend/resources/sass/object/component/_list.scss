@@ -1,0 +1,9 @@
+.c-lists {
+    .c-list {
+        margin-bottom: 16px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        .c-list__target {}
+    }
+}

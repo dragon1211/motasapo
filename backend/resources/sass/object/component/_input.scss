@@ -1,0 +1,140 @@
+.c-input {
+    position: relative;
+}
+/*
+    label
+*/
+.c-input__label {
+    display: block;
+    position: absolute;
+    pointer-events:none;
+    padding: 3px 5px;
+    background: #fff;
+    top: 0;
+    left: 0;
+    color: $colorGray;
+    transition: .3s;
+    transform: translate(10px, 12px) scale(1);
+    &.is-active, &.is-text {
+        transform: translate(6px, -10px);
+        font-size: 10px;
+        color: $colorBlack;
+    }
+
+}
+
+.c-input__target {
+    &.is-invalid {
+        border: 1px solid #ff9999;
+    }
+}
+
+/*
+    checkbox
+*/
+.c-input__checkbox {
+    display: block;
+    position: relative;
+    padding-left: 20px;
+    padding-top: 3px;
+    input[type=checkbox],
+    input[type=radio] {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+        left: 0;
+    }
+    label {
+        padding-top: 5px;
+        padding-left: 10px;
+    }
+    .color-box {
+        position: absolute;
+        top: 2px;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        border-radius: 5px;
+        background: #fff;
+        border: 1px solid #C3C3C3;
+        &.circle {
+            border-radius: 50%;
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            display: none;
+            left: 7px;
+            top: 4px;
+            width: 4px;
+            height: 9px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+}
+
+.c-input__checkbox input:checked ~ .color-box {
+    background: #000;
+    border: 1px solid #000;
+    &:after {
+        display: block;
+    }
+}
+
+
+/*
+    list
+*/
+.c-input__lists {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    /* 横幅いっぱい */
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    /* 横並び */
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    .c-input__list {
+        position: relative;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        label {
+            cursor: pointer;
+            color: #cccccc;
+            padding: 5px 20px;
+            border: 1px solid #C3C3C3;
+            display: inline-block;
+            border-radius: 30px;
+            transition: .2s;
+        }
+        input {
+            position: absolute;
+            z-index: 1;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            &:checked ~ label {
+                color: #fff;
+                background: #000;
+                border: 1px solid #000;
+            }
+            &.non-check + label {
+                background: #ddd !important;
+            }
+            &:disabled + label {
+                background: #eee;
+            }
+        }
+    }
+}

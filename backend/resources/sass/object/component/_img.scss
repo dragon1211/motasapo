@@ -1,0 +1,53 @@
+.c-img--cover {
+    position: relative;
+    display: block;
+    &:before {
+        content: "";
+        padding-top: 100%;
+        display: block;
+    }
+    img {
+        position: absolute;
+        object-fit: cover;
+        font-family: 'object-fit: cover;';
+        height: 100%;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    }
+}
+.c-img--contain {
+    position: relative;
+    display: block;
+    img {
+        position: absolute;
+        object-fit: contain;
+        font-family: 'object-fit: contain;';
+        height: 100%;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    }
+}
+
+/*
+    画像サークル
+*/
+.c-img__circle {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/*
+    アイコン画像
+*/
+.c-img--icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+}
