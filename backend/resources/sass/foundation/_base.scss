@@ -1,0 +1,111 @@
+body {
+    font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    word-wrap: break-word;
+    @include mq_up(md) {
+        font-size: 16px;
+    }
+}
+body {
+    background: #f7f9fc;
+}
+h1, h2, h3, h4 {
+    font-weight: 700;
+}
+h1 {
+    font-size: 24px;
+}
+h2 {
+    font-size: 22px;
+}
+h3 {
+    font-size: 18px;
+}
+a {
+    text-decoration: none;
+}
+img {
+    width: 100%;
+    vertical-align: bottom;
+}
+input, textarea, select {
+    border: 1px solid #C3C3C3;
+    width: 100%;
+    border-radius: 3px;
+    padding: 10px;
+    resize: none;
+    line-height: 1.6;
+    &:hover, &:focus {
+        border: 1px solid $colorBlack;
+    }
+}
+th {
+    white-space: nowrap;
+}
+
+/* placeholder */
+input::placeholder,
+textarea::placeholder {
+    color: #cccccc;
+}
+/* IE */
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: #cccccc;
+}
+/* Edge */
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+    color: #cccccc;
+}
+textarea {
+    height: 200px;
+}
+
+.wrap {
+    max-width: 540px;
+    width: 100%;
+    margin: auto;
+}
+
+
+.sp-only {
+    @include mq_up(md) {
+        display: none;
+    }
+}
+.pc-only {
+    @include mq_down(md) {
+        display: none;
+    }
+}
+
+
+/* --------------------------------------------
+    z-index
+-------------------------------------------- */
+.l-header { z-index: 1001; }
+.alert { z-index: 100000; }
+.l-header--nav #menu-btn-check { z-index: 100; }
+.l-header--nav .menu-btn { z-index: 100; }
+.l-header--nav .menu-btn span { z-index: 100; }
+.l-header--nav .nav-menu { z-index: -1; }
+
+/* --------------------------------------------
+    key-frame
+-------------------------------------------- */
+@keyframes fadeOut {
+    0% {
+        transform: translateY(0%);
+    }
+    100% {
+        opacity: 0;
+        display: none;
+        transform: translateY(-100%);
+    }
+}

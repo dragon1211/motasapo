@@ -1,0 +1,70 @@
+/*
+    GlobalNav
+*/
+.l-nav {
+    position: fixed;
+    width: 100%;
+    right: auto;
+    left: auto;
+    bottom: 0;
+    top: auto;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.08);
+    @include mq_up(md) {
+        width: 540px;
+    }
+    .l-nav--items {
+        display: flex;
+        justify-content: space-around;
+    }
+    .l-nav--link {
+        width: 24px;
+        height: 24px;
+        display: block;
+        span {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        &.link-house span {
+            background: center / contain no-repeat url('/storage/base/icon-nav-house-g.png');
+        }
+        &.link-search span {
+            background: center / contain no-repeat url('/storage/base/icon-nav-search-g.png');
+        }
+        &.link-camera span {
+            background: center / contain no-repeat url('/storage/base/icon-nav-camera-g.png');
+        }
+        &.link-map span {
+            background: center / contain no-repeat url('/storage/base/icon-nav-map-g.png');
+        }
+    }
+    .l-nav--item {
+        position: relative;
+        padding: 8px 0 16px;
+        &.is-selected:before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 4px;
+            position: absolute;
+            bottom: 0;
+            border-radius: 2px 2px 0 0;
+            background: #2E99E8;
+        }
+        &.is-selected .link-house span {
+            background: center / contain no-repeat url('/storage/base/icon-nav-house-b.png');
+        }
+        &.is-selected .link-search span {
+            background: center / contain no-repeat url('/storage/base/icon-nav-search-b.png');
+        }
+        &.is-selected .link-camera span {
+            background: center / contain no-repeat url('/storage/base/icon-nav-camera-b.png');
+        }
+        &.is-selected .link-map span {
+            background: center / contain no-repeat url('/storage/base/icon-nav-map-b.png');
+        }
+    }
+}

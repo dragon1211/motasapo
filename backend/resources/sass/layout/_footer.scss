@@ -1,0 +1,8 @@
+.l-footer {
+    padding: 16px;
+    & > p {
+        text-align: center;;
+        font-size: 11px;
+        color: $colorGray
+    }
+}
