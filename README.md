@@ -42,27 +42,27 @@
     <li>...</li>
 </ul>
 <h3>[gps_home.jpg]</h3>
-<img src="./info/gps_home.jpg"/>
+<img src="./info/gps_home.jpg" width="440px" height="700px"/>
 <hr>
 
 <h3>[gps_intro.jpg]</h3>
-<img src="./info/gps_intro.jpg"/>
+<img src="./info/gps_intro.jpg" width="440px" height="700px"/>
 <hr>
 
 <h4>[gps_img_upload.jpg]</h4>
-<img src="./info/gps_img_upload.jpg"/>
+<img src="./info/gps_img_upload.jpg" width="440px" height="700px"/>
 <hr>
 
 <h4>[gps_map.jpg]</h4>
-<img src="./info/gps_map.jpg"/>
+<img src="./info/gps_map.jpg" width="440px" height="700px"/>
 <hr>
 
 <h4>[gps_message.jpg]</h4>
-<img src="./info/gps_message.jpg"/>
+<img src="./info/gps_message.jpg" width="440px" height="700px"/>
 <hr>
 
 <h4>[gps_profile.jpg]</h4>
-<img src="./info/gps_profile.jpg"/>
+<img src="./info/gps_profile.jpg" width="440px" height="700px"/>
 <hr>
 <h3>Install </h3>
 <ul>
