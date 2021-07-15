@@ -38,7 +38,7 @@
 </ul>
 <h3>[gps_home.jpg]</h3>
 
-![Laravel & React Expert](./gps_home.jpg)
+![Laravel & React Expert](../info/gps_home.jpg)
 <h3>[gps_intro.jpg]</h3>
 
 ![Laravel & React Expert](./gps_intro.jpg)
