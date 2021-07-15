@@ -24,6 +24,11 @@
             このページは、彼らの場所から最短距離にあるパートナーやショップの位置を示しています。(This page shows the position of partners and shops where there are in the shortest way from their place.)
         </dl>
     </li>
+    <li>[gps_matching.jpg]
+        <dl>
+            このページには、パートナーやショップの情報が表示されます。(This page shows the information of partners and shops.)
+        </dl>
+    </li>
     <li>[gps_message.jpg]
          <dl>
             このページから、実行時にパートナーにメッセージを送信できます。(Through this page, you can send message to your partner in run-time)
@@ -37,22 +42,26 @@
     <li>...</li>
 </ul>
 <h3>[gps_home.jpg]</h3>
+<img src="./info/gps_home.jpg"/>
+<hr>
 
-![Laravel & React Expert](./gps_home.jpg)
 <h3>[gps_intro.jpg]</h3>
+<img src="./info/gps_intro.jpg"/>
+<hr>
 
-![Laravel & React Expert](./gps_intro.jpg)
-<h4>(./gps_img_upload.jpg)</h4>
+<h4>[gps_img_upload.jpg]</h4>
+<img src="./info/gps_img_upload.jpg"/>
+<hr>
 
-![Laravel & React Expert](./gps_img_upload.jpg)
-<h4>(./gps_map.jpg)</h4>
+<h4>[gps_map.jpg]</h4>
+<img src="./info/gps_map.jpg"/>
+<hr>
 
-![Laravel & React Expert](./gps_map.jpg)
-<h4>(./gps_message.jpg)</h4>
+<h4>[gps_message.jpg]</h4>
+<img src="./info/gps_message.jpg"/>
+<hr>
 
-![Laravel & React Expert](./gps_message.jpg)
-<h4>(./gps_profile.jpg)</h4>
-
+<h4>[gps_profile.jpg]</h4>
 <img src="./info/gps_profile.jpg"/>
 <hr>
 <h3>Install </h3>
