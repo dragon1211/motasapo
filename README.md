@@ -1,11 +1,17 @@
-# Matching Site
-<h1>Matching Site by using GPS and Message</h1>
+# Matching Site by using GPS and Message
+<div style="background-color:#454545; color:white">
+
 <h3>このプロジェクトは、Googleマップとランタイムメッセージを使用してサイトを照合しています。(This project is matching site by using Google Map and run-time message.)</h3><br>
 <h4><b>Language</b>: Laravel & React & Typescript</h4><hr>
 <ul>
     <li>[gps_home.jpg]
         <dl>
             このページは、ログインしてサインアップするための最初のページです。(This page is first page to login and signup.)
+        </dl>
+    </li>
+    <li>[gps_intro.jpg]
+        <dl>
+            このページはあなたの紹介を示しています。(This page shows your introduction.)
         </dl>
     </li>
     <li>[gps_img_upload.jpg]
@@ -33,6 +39,9 @@
 <h3>[gps_home.jpg]</h3>
 
 ![Laravel & React Expert](./gps_home.jpg)
+<h3>[gps_intro.jpg]</h3>
+
+![Laravel & React Expert](./gps_intro.jpg)
 <h4>(./gps_img_upload.jpg)</h4>
 
 ![Laravel & React Expert](./gps_img_upload.jpg)
@@ -71,3 +80,4 @@
 <hr>
 
 &copy; 2021 All rights reserved.
+<div>
