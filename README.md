@@ -53,7 +53,7 @@
 ![Laravel & React Expert](./gps_message.jpg)
 <h4>(./gps_profile.jpg)</h4>
 
-![Laravel & React Expert](./info/gps_profile.jpg)
+<img src="./info/gps_profile.jpg"/>
 <hr>
 <h3>Install </h3>
 <ul>
