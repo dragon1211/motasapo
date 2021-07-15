@@ -25,8 +25,8 @@ class PostFactory extends Factory
     {
         static $password;
         return [
-            'type'           => 0,
-            'account_id'     => function () { return self::$sequence++; },
+            'type'           => function() { return rand(0, 1); },
+            'account_id'     => function () { return 1; },
             'text'           => $this->faker->sentence,
             'limit_at'       => NULL,
         ];

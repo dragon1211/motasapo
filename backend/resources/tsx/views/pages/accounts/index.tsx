@@ -7,11 +7,22 @@ const Account = () => {
         <GlobalNav />
 	)
 }
+if(document.getElementById('account')){
+	ReactDOM.render(
+		<Account />,
+		document.getElementById('account')
+	)
+	
+}
 
-ReactDOM.render(
-	<Account />,
-	document.getElementById('account')
-)
+
+if(document.getElementById('account')){
+
+	ReactDOM.render(
+		<GlobalNav />,
+		document.getElementById('account')
+		)
+	}
 
 // import React from 'react';
 // import ReactDOM from 'react-dom';

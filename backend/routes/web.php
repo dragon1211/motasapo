@@ -7,7 +7,10 @@ use App\Http\Controllers\Front\AccountController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Front\CommonController;
 use App\Http\Controllers\Front\Account\PostController;
+use App\Http\Controllers\Front\Account\GpsController;
 
+use App\Http\Controllers\Front\Account\MypageController;
+use App\Http\Controllers\Front\Account\RequestController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
 /*
@@ -57,9 +60,9 @@ Route::name('page.')->group(function () {
 --------------------------------------------------------------------------*/
 /* ユーザーメール認証機能 */
 Route::get('register-user/', [RegisteredUserController::class, 'create'])->name('register.user');
-Route::post('register-user', [RegisteredUserController::class, 'store'])->name('register.user.post');
 /* ショップメール認証機能 */
 Route::get('register-shop/', [RegisteredUserController::class, 'create'])->name('register.shop');
+Route::post('register-user', [RegisteredUserController::class, 'store'])->name('register.user.post');
 Route::post('register-shop', [RegisteredUserController::class, 'store'])->name('register.shop.post');
 
 // ユーザー 登録フロー
@@ -85,14 +88,54 @@ Route::post('register-shop', [RegisteredUserController::class, 'store'])->name('
 
 Route::middleware(['auth:sanctum', 'verified'])->prefix('account')->name('account.')->group(function () {
     // Route::get('/post', [PostController::class, 'postIndex'])->name('post.index');
-    // Route::get('/post', function() {
-    //     return view('accounts.index');
-    // });
-    Route::get('{all}', function() {
+    Route::get('/post', function() {
         return view('accounts.index');
-    })->where(['all' => '.*']);
+    });
+
+    Route::get('/gps', [GpsController::class, 'index']);
+    Route::get('/gps/detail/{id}', [GpsController::class, 'detail']);
+    Route::get('/gps/new', [GpsController::class, 'new']);
+    Route::post('/gps/api', [GpsController::class, 'getdata']);
+
+    // チャットルームのページを返却
+    Route::get('/chatroom', function() {
+        return view("accounts.messages.index");
+    });
+
+    // Chatroomについて
+    Route::get('/chatroom/page', 'ChatroomController@ChatroomRead');
+    Route::get('/id', 'ChatroomController@AccountIdRead');
+
+    // Messagesについて
+    Route::get('/chat/{room_id}/{id}', 'MessageController@MessageRead');
+    Route::get('/user/{id}', 'MessageController@getUser');
+    Route::get('/myself/{id}', 'MessageController@getMyself');
+
+    Route::post('/chat/sendMessage', 'MessageController@SendMessage');
+    Route::post('/chat/sendImage', 'MessageController@SendImage');
+    Route::get('/mypage', [RequestController::class,'index']);
+    Route::get('/request/new/type', [RequestController::class,'newtype']);
+    Route::get('/request/new/vehicle', [RequestController::class,'new_vehicle']);
+    Route::get('/request/new/image', [RequestController::class,'new_image']);
+    Route::get('/request/new/detail', [RequestController::class,'new_detail']);
+    Route::get('/request/new/request', [RequestController::class,'new_request']);
+    Route::get('/request/new/complete', [RequestController::class,'new_complete']);
+
+    
+
+    // Route::get('{all}', function() {
+    //     return view('accounts.index');
+    // })->where(['all' => '.*']);
+    Route::get('/{any}', function () {
+        return view('accounts.messages.index');
+    })->where('any','.*');
 });
 
+Route::middleware(['auth:sanctum', 'verified'])->prefix('shop')->name('shop.')->group(function () {
+    Route::get('/{any}', function () {
+        return view('shops.index');
+    })->where('any','.*');
+});
 
 // Route::get('/', function () {
 //     return view('app');
@@ -115,3 +158,4 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('account')->name('accoun
 
 // Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

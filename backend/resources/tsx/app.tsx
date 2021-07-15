@@ -2,6 +2,7 @@
     views
 ----------------------------------------------------------------*/
 /* components */
+// require('../tsx/views/components/CategoryList')
 require('../tsx/views/components/CategoryList')
 // require('./views/components/CategoryLists')
 
@@ -25,4 +26,13 @@ require('../tsx/views/components/CategoryList')
 /*----------------------------------------------------------------
     PAGE
 ----------------------------------------------------------------*/
-require('../../resources/tsx/views/pages/accounts/index')
+
+require('../tsx/views/pages/accounts/gps/gps/index')
+require('../tsx/views/pages/accounts/gps/detail/index')
+require('../tsx/views/pages/accounts/gps/new/index')
+//-------------------------------------------------------------//
+require('./views/components/Mypage/index')
+
+require('../tsx/views/pages/accounts/index')
+
+

@@ -32,14 +32,14 @@
 
 <div class="page-content">
     @if(Request::is('register-user'))
-    <form method="POST" action="{{ route('register.user') }}">
+    <form method="POST" action="{{ route('register.user.post') }}">
     @elseif(Request::is('register-shop'))
     <form method="POST" action="{{ route('register.shop') }}">
     @endif
     {{--  <form method="POST" action="{{ route('register') }}">  --}}
     {{-- <form method="POST" action="{{ route('page.contact.post') }}"> --}}
         @csrf
-        <ul class="c-lists">
+        <ul class="c-lists custom">
             <li class="c-list c-input">
                 <label
                     for="name"

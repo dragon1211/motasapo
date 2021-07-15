@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PostViewsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(PrefecturesTableSeeder::class);
+        $this->call(LocationTableSeeder::class);
     }
 }

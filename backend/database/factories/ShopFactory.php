@@ -13,7 +13,7 @@ class ShopFactory extends Factory
      * @var string
      */
     protected $model = Shop::class;
-    private static int $sequence = 1;
+    private static $sequence = 1;
 
     /**
      * Define the model's default state.

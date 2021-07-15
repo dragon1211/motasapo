@@ -13,9 +13,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with('postImages')->with('postTags')->with('postLikes')->with('postViews')->get();
+        $posts = Post::with('postImages')->with('postTags')->with('postLikes')->with('postViews')->limit(20)->offset($request->offset)->get();
         return $posts;
     }
 

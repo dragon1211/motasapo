@@ -1,8 +1,7 @@
 import React from 'react';
 // 投稿
 import Post from '../pages/accounts/posts/index';
-import GPS from './GPS';
-
+import { MyPageIndex } from '../components/Mypage/mypage';
 // 検索ページ
 // 新規投稿ページ
 // GPSページ
@@ -13,8 +12,7 @@ import {
     Route,
     Link
 } from "react-router-dom";
-
-
+import { GPS } from '../pages/accounts/gps/gps/gps';
 
 export default function GlobalNav() {
     return (
@@ -30,22 +28,22 @@ export default function GlobalNav() {
                     <NewPost />
                 </Route>
                 <Route path="/account/gps/">
-                    <Gps />
+                    <GPS />
                 </Route>
-                <Route path="/account/mypage/">
-                    <Mypage />
-                </Route>
+                {/* <Route path="/account/mypage/">
+                    <MyPageIndex />
+                </Route> */}
             </Switch>
 
             <div className="l-nav">
                 <div className="l-nav--items c-flex v-center">
                     <div className="l-nav--item is-selected">
-                        {/* <a href="" className="l-nav--link link-house">
+                        <a href="/account/post" className="l-nav--link link-house">
                             <span />
-                        </a> */}
-                        <Link to="/account/post/" className="l-nav--link link-house">
+                        </a>
+                        {/* <Link to="/account/post/" className="l-nav--link link-house">
                             <span />
-                        </Link>
+                        </Link> */}
                     </div>
                     <div className="l-nav--item">
                         {/* <a href="" className="l-nav--link link-search">
@@ -67,9 +65,9 @@ export default function GlobalNav() {
                         {/* <a href="" className="l-nav--link link-map">
                             <span />
                         </a> */}
-                        <Link to="/account/gps/" className="l-nav--link link-map">
+                        <a href="/account/gps/" className="l-nav--link link-map">
                             <span />
-                        </Link>
+                        </a>
                     </div>
                     <div className="l-nav--item">
                         {/* <a href="" className="l-nav--link link-icon">
@@ -77,11 +75,17 @@ export default function GlobalNav() {
                                 <img src="/storage/base/50000087_1193305484150794_571276761136889856_n.jpeg" alt=""/>
                             </span>
                         </a> */}
-                        <Link to="/account/mypage/" className="l-nav--link link-icon">
+                        {/* <Link  to="/account/mypage/" className="l-nav--link link-icon">
                             <span className="c-img--cover c-img__circle">
                                 <img src="/storage/base/50000087_1193305484150794_571276761136889856_n.jpeg" />
                             </span>
-                        </Link>
+                        </Link> */}
+                        <a  href="/account/mypage/" className="l-nav--link link-icon">
+                            <span className="c-img--cover c-img__circle">
+                                <img src="/storage/base/50000087_1193305484150794_571276761136889856_n.jpeg" />
+                            </span>
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -123,8 +127,8 @@ function NewPost() {
     return <h2>NewPost</h2>;
 }
 function Gps() {
-    return ( <GPS/> );
+    return <h2>GPS</h2>;
 }
-function Mypage() {
-    return <h2>MyPage</h2>;
-}
+// function Mypage() {
+//     return <MyPageIndex/>;
+// }

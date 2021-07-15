@@ -18,7 +18,7 @@
                     </a>
                 </div>
                 <div class="hamburger-memu nav-icon">
-                    <a href="">
+                    <a href="{{ url('/account/chatroom') }}">
                         <span class="batch-circle"></span>
                         <img src="{{ asset('/storage/base/icon-header-mail-g.png') }}" alt="メールアイコン">
                     </a>
