@@ -16,7 +16,7 @@ class CreateLocationsTable extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement()->comment('ID');
             $table->foreignId('account_id')->constrained('accounts')->comment('アカウントID');
-            $table->geometry('location');
+            $table->string('location');
             $table->dateTime('created_at', $precision = 0)->nullable();
             $table->dateTime('updated_at', $precision = 0)->nullable();
         });

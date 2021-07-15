@@ -15,7 +15,7 @@ class Chatroom extends Model
      */
     protected $table = 'chatrooms';
     protected $fillable = [
-        'send_account_id',
-        'receive_account_id',
+        'user1',
+        'user2',
     ];
 }

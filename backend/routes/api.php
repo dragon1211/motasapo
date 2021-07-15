@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\RegisterController;
+
+use Laravel\Fortify\Http\Controllers\RegisteredUserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+/*--------------------------------------------------------------------------
+    新規登録フロー
+--------------------------------------------------------------------------*/
+/* ユーザーメール認証機能 */
+
+
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();

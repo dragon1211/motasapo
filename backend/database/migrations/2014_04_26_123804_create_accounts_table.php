@@ -24,6 +24,7 @@ class CreateAccountsTable extends Migration
             $table->string('profile', 1000)->nullable()->comment('プロフィール');
             $table->string('img', 100)->nullable()->comment('プロフィール画像');
             $table->rememberToken()->nullable();
+            $table->dateTime('last_login_at')->comment('最終ログイン');
             $table->dateTime('created_at', $precision = 0)->nullable();
             $table->dateTime('updated_at', $precision = 0)->nullable();
         });

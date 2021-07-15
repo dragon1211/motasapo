@@ -30,7 +30,7 @@ class CreateNewUser implements CreatesNewUsers
         if(isset($input['sex'])) {
             // users のみの項目
             Validator::make($input, [
-                'account'  => ['required', 'string', 'max:50', 'min:5'],
+                'account'  => ['required', 'string', 'max:50', 'min:5', Rule::unique(Account::class)],
                 'name'     => ['required', 'string', 'max:255'],
                 'email'    => ['required', 'string', 'email', 'max:255', Rule::unique(Account::class)],
                 'password' => $this->passwordRules(),
@@ -39,7 +39,7 @@ class CreateNewUser implements CreatesNewUsers
         } else {
             // shops のみの項目
             Validator::make($input, [
-                'account'  => ['required', 'string', 'max:50', 'min:5'],
+                'account'  => ['required', 'string', 'max:50', 'min:5', Rule::unique(Account::class)],
                 'name'     => ['required', 'string', 'max:255'],
                 'email'    => ['required', 'string', 'email', 'max:255', Rule::unique(Account::class)],
                 'password' => $this->passwordRules(),
@@ -60,6 +60,7 @@ class CreateNewUser implements CreatesNewUsers
                 'name'     => $input['name'],
                 'email'    => $input['email'],
                 'password' => Hash::make($input['password']),
+                'last_login_at' => date('Y-m-d h:i:s')
             ]);
             // users の登録
             if(isset($input['sex'])) {
@@ -97,6 +98,8 @@ class CreateNewUser implements CreatesNewUsers
             return $account;
         } catch (\Exception $e) {
             DB::rollback();
+            var_dump($e->getMessage());
+            die();
             $error = '登録の処理に失敗しました。';
             return back()->withErrors($error)->withInput();
         }

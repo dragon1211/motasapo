@@ -7,5 +7,38 @@ use Illuminate\Http\Request;
 
 class RequestController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('accounts.requests.index');
+    } 
+    
+    public function newtype()
+   {
+       return view('accounts.requests.new_type'); 
+   }
+
+   public function new_vehicle()
+   {
+       return view('accounts.requests.new_vehicle');
+   }
+
+   public function new_image()
+   {
+       return view('accounts.requests.new_image');
+   }
+
+   public function new_detail()
+   {
+       return view('accounts.requests.new_detail');
+   }
+
+   public function new_request()
+   {
+       return view('accounts.requests.new_request');
+   }
+
+   public function new_complete()
+   {
+       return view('accounts.requests.new_complete');
+   }
 }

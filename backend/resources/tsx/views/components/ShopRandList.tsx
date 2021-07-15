@@ -27,7 +27,7 @@ const ShopRandList: React.VFC = () => {
             { shops.map((shop) => {
                 return (
                     <li key={shop.id} className="p-list--shop__rand--item">
-                        <a href={shop.url}>
+                        <a href={`/shop/profile/${shop.id}`}>
                             <div className="c-img--cover c-img--icon">
                                 <img src="/storage/base/logo-square.png" alt="モタサポのロゴ" />
                                 {/* <img src={shop.account.img} alt="モタサポのロゴ" /> */}

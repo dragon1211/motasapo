@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use App\Models\Post;
+use App\Models\Account;
 
 class PostsTableSeeder extends Seeder
 {
@@ -14,6 +16,6 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        Post::factory()->count(10)->create();
+        Post::factory()->count(120)->create();
     }
 }

@@ -32,6 +32,7 @@ class AccountFactory extends Factory
             'name'              => $this->faker->name,
             'profile'           => $this->faker->sentence,
             'img'               => '/storage/base/logo-square.png',
+            'last_login_at'     => now(),
             'created_at'        => now(),
             'updated_at'        => now(),
         ];
