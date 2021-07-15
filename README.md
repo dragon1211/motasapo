@@ -38,7 +38,7 @@
 </ul>
 <h3>[gps_home.jpg]</h3>
 
-![Laravel & React Expert](../info/gps_home.jpg)
+![Laravel & React Expert](./gps_home.jpg)
 <h3>[gps_intro.jpg]</h3>
 
 ![Laravel & React Expert](./gps_intro.jpg)
@@ -53,7 +53,7 @@
 ![Laravel & React Expert](./gps_message.jpg)
 <h4>(./gps_profile.jpg)</h4>
 
-![Laravel & React Expert](./gps_profile.jpg)
+![Laravel & React Expert](./info/gps_profile.jpg)
 <hr>
 <h3>Install </h3>
 <ul>
