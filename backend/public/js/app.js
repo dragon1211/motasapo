@@ -27387,10 +27387,11 @@ var GPS = /*#__PURE__*/function (_Component) {
                     lng: _this2.state.longitude
                   };
                   axios__WEBPACK_IMPORTED_MODULE_4___default().post('/account/gps/api', curPos).then(function (response) {
-                    _this2.test_data = response.data;
+                    var res = response.data;
 
                     _this2.setState({
-                      filter_data: _toConsumableArray(_this2.test_data),
+                      total_data: _toConsumableArray(res),
+                      filter_data: _toConsumableArray(res),
                       isLoading: true
                     });
                   });
@@ -27405,14 +27406,29 @@ var GPS = /*#__PURE__*/function (_Component) {
       }));
     };
 
-    _this.getData();
+    var state = window.localStorage.getItem('state');
 
-    _this.state = {
-      filter_data: [],
-      latitude: 0,
-      longitude: 0,
-      isLoading: false
-    };
+    if (state != null) {
+      _this.state = {
+        total_data: _toConsumableArray(JSON.parse(state).total_data),
+        filter_data: _toConsumableArray(JSON.parse(state).total_data),
+        latitude: JSON.parse(state).latitude,
+        longitude: JSON.parse(state).longitude,
+        isLoading: JSON.parse(state).isLoading
+      };
+    } else {
+      _this.state = {
+        total_data: [],
+        filter_data: [],
+        latitude: 0,
+        longitude: 0,
+        isLoading: false
+      };
+
+      _this.getData();
+    }
+
+    _this.saveLocalStorages = _this.saveLocalStorages.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -27426,8 +27442,8 @@ var GPS = /*#__PURE__*/function (_Component) {
     value: function selectAll() {
       var items = [];
 
-      for (var i = 0; i < this.test_data.length; i++) {
-        items.push(this.test_data[i]);
+      for (var i = 0; i < this.state.total_data.length; i++) {
+        items.push(this.state.total_data[i]);
       }
 
       this.setState({
@@ -27439,8 +27455,8 @@ var GPS = /*#__PURE__*/function (_Component) {
     value: function selectShop() {
       var items = [];
 
-      for (var i = 0; i < this.test_data.length; i++) {
-        if (this.test_data[i].type == "shop") items.push(this.test_data[i]);
+      for (var i = 0; i < this.state.total_data.length; i++) {
+        if (this.state.total_data[i].type == "shop") items.push(this.state.total_data[i]);
       }
 
       this.setState({
@@ -27452,8 +27468,8 @@ var GPS = /*#__PURE__*/function (_Component) {
     value: function selectFemale() {
       var items = [];
 
-      for (var i = 0; i < this.test_data.length; i++) {
-        if (this.test_data[i].type == "female") items.push(this.test_data[i]);
+      for (var i = 0; i < this.state.total_data.length; i++) {
+        if (this.state.total_data[i].type == "female") items.push(this.state.total_data[i]);
       }
 
       this.setState({
@@ -27465,8 +27481,8 @@ var GPS = /*#__PURE__*/function (_Component) {
     value: function selectMale() {
       var items = [];
 
-      for (var i = 0; i < this.test_data.length; i++) {
-        if (this.test_data[i].type == "male") items.push(this.test_data[i]);
+      for (var i = 0; i < this.state.total_data.length; i++) {
+        if (this.state.total_data[i].type == "male") items.push(this.state.total_data[i]);
       }
 
       this.setState({
@@ -27478,13 +27494,19 @@ var GPS = /*#__PURE__*/function (_Component) {
     value: function selectUser() {
       var items = [];
 
-      for (var i = 0; i < this.test_data.length; i++) {
-        if (this.test_data[i].type == "user") items.push(this.test_data[i]);
+      for (var i = 0; i < this.state.total_data.length; i++) {
+        if (this.state.total_data[i].type == "user") items.push(this.state.total_data[i]);
       }
 
       this.setState({
         filter_data: [].concat(items)
       });
+    }
+  }, {
+    key: "saveLocalStorages",
+    value: function saveLocalStorages() {
+      window.localStorage.clear();
+      window.localStorage.setItem('state', JSON.stringify(this.state));
     }
   }, {
     key: "render",
@@ -27498,7 +27520,7 @@ var GPS = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "map-size"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_map__WEBPACK_IMPORTED_MODULE_3__.Map, {
-        markers: this.test_data
+        markers: this.state.total_data
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "wrap-info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
@@ -27560,7 +27582,9 @@ var GPS = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
         to: "/account/gps/new",
         className: "l-nav--link-gps"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", null, "\u52DF\u96C6\u3059\u308B")))))) : null);
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+        onClick: this.saveLocalStorages
+      }, "\u52DF\u96C6\u3059\u308B")))))) : null);
     }
   }]);
 
