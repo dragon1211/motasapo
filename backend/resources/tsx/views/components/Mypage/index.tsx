@@ -19,7 +19,7 @@ import {New_complete} from './new_complete';
 const Request = () => {
 	return (
         <Router >
-            <Header />
+            <Header/>
             <Switch>
                 <Route exact path="/account/mypage/" component={MyPageIndex}/>
                 <Route  path="/account/request/new/type/" component={New_type}/>

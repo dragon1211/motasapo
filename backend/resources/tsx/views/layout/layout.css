@@ -1,0 +1,21 @@
+.icon-layout{
+    font-size: 30px;
+    color: #C5C5C5;
+    cursor: pointer;
+}
+.image-icon-layout{
+    width: 30px;
+    height: 30px;
+    border-radius: 50% 50%;
+}
+.top-button{
+    background-color: #F5F5F5;
+    border-radius: 20px;
+}
+.top-button p{
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}

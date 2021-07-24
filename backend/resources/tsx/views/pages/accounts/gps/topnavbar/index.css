@@ -1,0 +1,15 @@
+.nav-top{
+    z-index: 10;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #eeeeee;
+    text-align: center;
+    justify-content: space-between;
+    position: fixed;
+    width: 540px;
+}
+.arrow-btn{
+    position: absolute;
+    left: 30px;
+    top: 9px;
+}

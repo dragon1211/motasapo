@@ -1,0 +1,78 @@
+
+.personInfo {
+    margin: 15px 0 0 0;
+    padding: 15px 0 0 0;
+    border-top: 1px solid rgb(226, 221, 221);
+    width: 100%;
+    font-family: "Helvetica", arial, sans-serif;
+    font-size: 15px;
+    line-height: 18px;
+    min-height: 110px;
+}
+
+.info-bar{
+    position: relative;
+}
+
+.avatar-wrapper{
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: 0px;
+    margin-right: 10px;
+}
+
+.gps-body .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50% 50%;
+}
+
+.gps-body .avatar:hover{
+    cursor: pointer;
+    opacity: 70%;
+}
+
+.gps-body  .info{
+    position: absolute;
+    padding: 10px 0;
+    left: 70px;
+    right: 0px;
+    margin:0px;
+}
+
+.gps-body .name {
+    font-weight: bold;
+    color:black;
+    font-size:15px;
+    margin-bottom: 4px;
+    margin-top: 0px;
+}
+
+.gps-body  .handle {
+    color: #8899a6;
+    font-size: 13px;
+}
+
+.gps-body .right{
+    float:right;
+}
+
+.gps-body .msg{
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+.gps-body .pic-shop{
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    left: 40%;
+}
+
+.gps-body .msgBox{
+    padding-top:80px;
+}

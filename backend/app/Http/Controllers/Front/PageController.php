@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
+
 class PageController extends Controller
 {
     /**
      * トップページ
      */
     public function top() {
+        
         return view('pages.top');
     }
 

@@ -16,12 +16,9 @@ import {
 
 
 export const MyPageIndex =() => {
-
-
-    
+  
         return (
-        <><GlobalNav />
-            <div>
+        <><div>
                 <div className="info">
                     <div className="row">
                         <div className="col-sm-6 text-center">
@@ -101,7 +98,8 @@ export const MyPageIndex =() => {
                     </div>
                 </div>
             </div>
-        </>
+            <GlobalNav /></>
+        
         );
     
     }

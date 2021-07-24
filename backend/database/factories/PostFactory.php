@@ -28,7 +28,8 @@ class PostFactory extends Factory
             'type'           => function() { return rand(0, 1); },
             'account_id'     => function () { return 1; },
             'text'           => $this->faker->sentence,
-            'limit_at'       => NULL,
+            // 'limit_at'       => NULL,
+            'limit_at'       => now(),
         ];
     }
 }

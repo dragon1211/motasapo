@@ -1,0 +1,41 @@
+.new-body{
+    padding: 70px 24px 10px;
+}
+
+.addPic-btn, .collect-btn{
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+.addPic-btn{
+    background-color: #005FA5;
+    color: white;
+}
+.collect-btn{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+}
+.addPic-btn:hover, .collect-btn:hover{
+    opacity: 70%;
+}
+
+.p-20{
+    padding: 15px 0;
+}
+
+.msg-input{
+    width: 100%;
+    min-height: 150px;
+}
+.tag-input{
+    width: 100%;
+    min-height: 70px;
+}
+
+.new-body label{
+    font-size: 0.8em;
+    margin-bottom: 3px;
+}
