@@ -9,7 +9,7 @@ type Props = {
 //---------------------------------------------------------------------------------------
 export const Map : React.FC<Props> = (props) => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDgRS_hLgSU8ZEFLHadCSWCFjYcgq6Ks7I" // Add your API key
+    googleMapsApiKey: "AIzaSyDHsb5vqLqXP2n-CszQ8HO8czTlPw7Vhcw" // Add your API key
   });
   return isLoaded ? <MyMap markers={props.markers}/> : null;
 }

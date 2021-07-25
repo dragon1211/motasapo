@@ -32,13 +32,14 @@ class RequestController extends Controller
        return view('accounts.requests.new_detail');
    }
 
-   public function new_request()
+   public function new_complete(Request $request)
    {
-       return view('accounts.requests.new_request');
-   }
-
-   public function new_complete()
+       $wish = $request->wish;
+     return response()->json(["msg"=>"eee"]);
+    
+   } 
+   public function view_new_complete()
    {
-       return view('accounts.requests.new_complete');
+        return view('accounts.requests.new_complete');
    }
 }

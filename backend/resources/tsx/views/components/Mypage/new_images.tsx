@@ -30,6 +30,12 @@ export class NewImages extends React.Component<{},State>{
             SAMPLE_IMAGES : [...images]
         }
     }
+
+    handleNext = ()=> {
+        console.log(JSON.stringify({"Images":this.state.SAMPLE_IMAGES}));
+        localStorage.setItem("Images", JSON.stringify({"Images":this.state.SAMPLE_IMAGES}))
+    }
+     
    
 
     handleImageChange = (e: any, id:any) => {
@@ -104,7 +110,8 @@ export class NewImages extends React.Component<{},State>{
                 {/* <a href="/account/request/new/detail">
                 <button className="round-btn bg-black my-5">次のステップへ</button>  </a>       */}
                 <Link to="/account/request/new/detail">
-                <button className="round-btn bg-black my-5">次のステップへ</button>  </Link>      
+                <button onClick={this.handleNext}className="round-btn bg-black my-5">次のステップへ</button>  
+                </Link>      
             </div>
         </div>
     </div>)

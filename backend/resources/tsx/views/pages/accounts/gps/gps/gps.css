@@ -22,13 +22,29 @@
     text-align: center;
 }
 
-.gps-body .round-btn:focus {
+.gps-body .round-btn.selected {
     background-color: rgb(39, 22, 22);
     color: white;
 }
 
 .gps-body .wrap-info {
     padding: 16px 24px;
+}
+
+.dummy-item-map{
+    border-radius: 4px;
+    background-color: #ddd;
+}
+.dummy-item-text{
+    width: 100%; 
+    height: 12px;
+    background-color: #ddd;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: dummyItemShimmer;
+    animation-timing-function: linear;
+    background-image: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
 }
 
 .gps-body .wrap-info .col-sm-4{
@@ -53,6 +69,8 @@
 
 .gps-body .l-nav{
     width: 540px;
+    z-index: 10;
+    padding: 0;
 }
 
 .l-nav--link-gps{

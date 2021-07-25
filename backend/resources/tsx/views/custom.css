@@ -1,0 +1,38 @@
+.comment-image{
+    width: 50px;
+    height: 50px;
+
+}
+.comment-text{
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+.detail-text{
+    color: black;
+    font-size: 16px;
+}
+.logo-image{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.logo-text{
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+.gps-image{
+    width: 50px!important;
+    height: 50px;
+    border-radius: 100%;
+}
+.gps-text{
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+.gps-bottom-text{
+    color: lightgray;
+    font-size: 18px;
+}

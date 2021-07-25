@@ -52,10 +52,12 @@ const PostList: React.VFC = () => {
                         </ul>
                     </div>
                     <div className="item-action c-flex v-center h-between content-item-wrap">
-                        <div className="item-action-comment c-flex v-center">
-                            <img src="/storage/base/icon-comment-w.png" />
-                            <span className="comments">コメントする</span>
-                        </div>
+                        <a href={`/account/post/comment/${post.id}`}>
+                            <div className="item-action-comment c-flex v-center">
+                                <img src="/storage/base/icon-comment-w.png" />
+                                <span className="comments">コメントする</span>
+                            </div>
+                        </a>
                         <div className="item-action-heart c-flex v-center">
                             <img src="/storage/base/icon-heart-w.png" />
                             <span className="goods">12</span>

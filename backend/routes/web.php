@@ -8,10 +8,12 @@ use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Front\CommonController;
 use App\Http\Controllers\Front\Account\PostController;
 use App\Http\Controllers\Front\Account\GpsController;
-
+use App\Http\Controllers\Front\Account\LoginController as AccountLoginController;
 use App\Http\Controllers\Front\Account\MypageController;
 use App\Http\Controllers\Front\Account\RequestController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\Front\Admin\LoginController;
+use App\Http\Controllers\Front\Admin\ManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +31,11 @@ use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 /*--------------------------------------------------------------------------
     common
 --------------------------------------------------------------------------*/
+
 Route::name('common.')->group(function () {
     // 多重送信エラー
     Route::get('/error', [CommonController::class, 'error'])->name('error');
 });
-
 
 
 /*--------------------------------------------------------------------------
@@ -41,6 +43,7 @@ Route::name('common.')->group(function () {
 --------------------------------------------------------------------------*/
 Route::name('page.')->group(function () {
     // トップページ
+    
     Route::get('/', [PageController::class, 'top'])->name('top');;
     // 利用規約
     Route::get('/terms', [PageController::class, 'terms'])->name('terms');
@@ -52,7 +55,6 @@ Route::name('page.')->group(function () {
     // お問い合わせ完了
     Route::get('/contact-us/thanks', [PageController::class, 'contactComplete'])->name('contact.complete');
 });
-
 
 
 /*--------------------------------------------------------------------------
@@ -119,9 +121,13 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('account')->name('accoun
     Route::get('/request/new/image', [RequestController::class,'new_image']);
     Route::get('/request/new/detail', [RequestController::class,'new_detail']);
     Route::get('/request/new/request', [RequestController::class,'new_request']);
-    Route::get('/request/new/complete', [RequestController::class,'new_complete']);
+    Route::get('/request/new/complete', [RequestController::class,'view_new_complete']); 
+    Route::post('/request/new/complete', [RequestController::class,'new_complete']);
 
-    
+    //Comment post Route
+    Route::get('/post/comment/{id}' , [PostController::class, 'comment']);
+    Route::post('/post/api' , [PostController::class, 'getData']);
+    Route::post('/post/addcomment' , [PostController::class, 'storeComment']);
 
     // Route::get('{all}', function() {
     //     return view('accounts.index');
@@ -159,3 +165,6 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('shop')->name('shop.')->
 // Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/motasapo-admin/login', [LoginController::class, 'admin_login'])->name('admin_login');
+Route::post('/motasapo-admin/login', [LoginController::class, 'admin_check'])->name('admin.login');
+Route::get('/motasapo-manager/user', [ManagerController::class, 'index'])->name('manager');

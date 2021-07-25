@@ -35,4 +35,4 @@ require('./views/components/Mypage/index')
 
 require('../tsx/views/pages/accounts/index')
 
-
+require('../tsx/views/components/comment/index')

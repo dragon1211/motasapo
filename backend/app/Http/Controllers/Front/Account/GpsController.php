@@ -43,6 +43,24 @@ class GpsController extends Controller
         return $d;
     }
 
+    public function getTime($time){
+        $sp_arr = explode(' ', $time);
+        $semi_arr = explode(':', $sp_arr[1]);
+        return ($semi_arr[0].":".$semi_arr[1]);
+    }
+
+    public function getInterval($start, $end){
+        $temp1 = explode(' ', $start);
+        $temp2 = explode(' ', $end);
+        $start_arr = explode(':', $temp1[1]);
+        $end_arr = explode(':', $temp2[1]);
+        $res1 = (string)((int)$end_arr[0]-(int)$start_arr[0]);
+        $res2 = (string)((int)$end_arr[1]-(int)$start_arr[1]);
+        if(strlen($res1)<2) $res1 = '0'.$res1;
+        if(strlen($res2)<2) $res2 = '0'.$res2;
+        return ($res1.":".$res2);
+    }
+
     //-------------API----------------------
     public function getdata(Request $request){
 
@@ -99,6 +117,12 @@ class GpsController extends Controller
         $min_w_dis = 10000000;
 
         foreach($total as $item){
+            $sql = "SELECT text, limit_at, updated_at FROM posts where id = ".$item->account_id." and account_id = ".$user_id;
+            $posts = DB::select($sql);
+            $post_arr = array();
+            foreach($posts as $post){
+                array_push($post_arr, $post);
+            }
             if($item->account_id == $user_id) {
 
                 $user['id'] = $item->account_id;
@@ -106,8 +130,8 @@ class GpsController extends Controller
                 $user['type'] = "user";
                 $user['position'] = $user_pos;
                 $user['distance'] = 0;
-                $user['finished'] =  '12:21';
-                $user['started'] = '15:10';
+                $user['started'] = $this->getTime($post_arr[0]->updated_at);
+                $user['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
                 $user['pic'] = $item->img;
                 $user['msgbox'] = [$item->profile];
                 continue;
@@ -125,8 +149,8 @@ class GpsController extends Controller
                     $male['type'] = "male";
                     $male['position'] = $this->getPosition($item->location);
                     $male['distance'] = floor($dis*1000);
-                    $male['finished'] =  '12:21';
-                    $male['started'] = '15:10';
+                    $male['started'] = $this->getTime($post_arr[0]->updated_at);;
+                    $male['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
                     $male['pic'] = $item->img;
                     $male['msgbox'] =[$item->profile];
                 }
@@ -141,8 +165,8 @@ class GpsController extends Controller
                     $female['type'] = "female";
                     $female['position'] = $this->getPosition($item->location);
                     $female['distance'] = floor($dis*1000);
-                    $female['finished'] =  '12:21';
-                    $female['started'] = '15:10';
+                    $female['started'] = $this->getTime($post_arr[0]->updated_at);;
+                    $female['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
                     $female['pic'] = $item->img;
                     $female['msgbox'] = [$item->profile];
                 }

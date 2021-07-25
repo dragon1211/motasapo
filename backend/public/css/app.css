@@ -775,6 +775,7 @@ textarea {
     GlobalNav
 */
 .l-nav {
+  padding: 5 20px;
   position: fixed;
   width: 100%;
   right: auto;

@@ -28,8 +28,8 @@ export const PersonInfo : React.FC<Props> = (props) => {
                 </div>
                 <div className='info'>
                     { type==="shop" && <img  src="/storage/base/icon-shop.png" className="pic-shop"/> }
-                    <p className="name"><span>{ name }</span> <span className="name right">{`終了時間　${finished}`}</span></p>
-                    <p className="handle"><span>{ `${distance}m` }</span> <span className="name right">{`開始時間　${started}`}</span></p>        
+                    <p className="name"><span>{ name }</span> <span className="name right">{`開始時間　${started}`}</span></p>
+                    <p className="handle"><span>{ `${distance}m` }</span> <span className="name right">{`終了時間　${finished}`}</span></p>        
                 </div>
             </div>
             <div className="msgBox">
