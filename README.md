@@ -1,8 +1,12 @@
-# Matching Site by using GPS and Message
+# バイク・車好きのためのウェブアプリ｜モタサポ
+### (Web app for motorcycle and car lovers ｜ Motasapo)
+<br>
 <div style="background-color:#454545; color:white">
 
-<h3>このプロジェクトは、Googleマップとランタイムメッセージを使用してサイトを照合しています。(This project is matching site by using Google Map and run-time message.)</h3><br>
-<h4><b>Language</b>: Laravel & React & Typescript</h4><hr>
+<h3>このシステムは、自転車、自動車、お客様の評価に基づいて、顧客の購買に信頼性を確保するシステムです。
+製品お客様の評価と顧客との間のメッセージ機能は、GPSを介して最も近い店と顧客を知っている彼らとメッセージを与え、製品の信頼性を確保してくれます。(This system is a system that secures reliability through customer purchases based on customer evaluations of bicycles and automobiles.
+Product customer testimonials and message between customers function know the nearest store and customer via GPS and message with them, thus gaining trust in the product.)</h3><br>
+<h4><b>Language</b>: Laravel & React & Typescript & MySQL</h4><hr>
 <ul>
     <li>[gps_home.jpg]
         <dl>

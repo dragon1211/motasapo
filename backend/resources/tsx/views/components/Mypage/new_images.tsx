@@ -66,8 +66,9 @@ export class NewImages extends React.Component<{},State>{
         for(let i=0; i < images.length; i++)
         {   
             if(i == id){
-                images[i].flag = false;
-                images[i].imgUri = '';
+                images[i].imgUri = images[i+1].imgUri;
+                images[i+1].flag = false;
+                images[i+1].imgUri = '';
             }
         }
         this.setState({
