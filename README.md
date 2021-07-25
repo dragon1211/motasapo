@@ -2,7 +2,7 @@
 <div style="background-color:#454545; color:white">
 
 <h3>このプロジェクトは、Googleマップとランタイムメッセージを使用してサイトを照合しています。(This project is matching site by using Google Map and run-time message.)</h3><br>
-<h4><b>Language</b>: Laravel & React & Typescript</h4><hr>
+<h4><b>Language</b>: Laravel & React & 
 <ul>
     <li>[gps_home.jpg]
         <dl>
