@@ -1,4 +1,5 @@
 .l-main .wrap-inner {
+    min-height: 760px;
     overflow-x: hidden;
     padding-bottom: 55px;
 }
@@ -14,15 +15,15 @@
     min-height: 110px;
 }
 
-.info-bar{
+.info-bar {
     position: relative;
 }
 
-.message-Box{
+.message-Box {
     position: relative;
 }
 
-.avatar-wrapper{
+.avatar-wrapper {
     position: absolute;
     width: 50px;
     height: 50px;
@@ -30,7 +31,7 @@
     margin-right: 10px;
 }
 
-.message-wrapper{
+.message-wrapper {
     position: absolute;
     width: 40px;
     height: 40px;
@@ -44,20 +45,20 @@
     border-radius: 50% 50%;
 }
 
-.avatars:hover{
+.avatars:hover {
     cursor: pointer;
     opacity: 70%;
 }
 
-.comment-img{
+.comment-img {
     position: relative;
     width: 40px;
     height: 40px;
     left: 0px;
-    float:left;
+    float: left;
 }
 
-.comment-info{
+.comment-info {
     position: relative;
     padding: 15px 10px 20px 0;
     right: 0px;
@@ -65,8 +66,8 @@
 
 .comment-name {
     font-weight: bold;
-    color:black;
-    font-size:15px;
+    color: black;
+    font-size: 15px;
     margin-bottom: 4px;
 }
 
@@ -75,11 +76,11 @@
     font-size: 13px;
 }
 
-.right{
-    float:right;
+.right {
+    float: right;
 }
 
-.msg{
+.msg {
     margin-top: 15px;
     padding: 10px 15px;
     background-color: #f5f5f5;
@@ -87,7 +88,7 @@
     border-radius: 10px;
 }
 
-.comment-msg{
+.comment-msg {
     margin-bottom: 15px;
     padding: 10px 15px;
     background-color: #f5f5f5;
@@ -95,14 +96,14 @@
     border-radius: 10px;
 }
 
-.pic-shop{
+.pic-shop {
     position: absolute;
     width: 34px;
     height: 34px;
     left: 40%;
 }
 
-.comment-Box{
+.comment-Box {
     padding: 0 0 0 55px;
     position: relative;
 }
@@ -145,7 +146,7 @@
 .comment-input {
     padding: 0px;
     position: relative;
-    float:right;
+    float: right;
     width: 85%;
 }
 
@@ -158,15 +159,17 @@
     bottom: 0;
     z-index: 9;
     background-color: #ffffff;
-  }
-
-.comment-lav > p {
-text-align: center;
-font-size: 11px;
-color: #B2B2B2;
+    border-top: 1px solid;
+    border-color: #d4d4d4;
 }
 
-.comment-field{
+.comment-lav>p {
+    text-align: center;
+    font-size: 11px;
+    color: #B2B2B2;
+}
+
+.comment-field {
     height: 55px;
 }
 
@@ -181,7 +184,6 @@ color: #B2B2B2;
         padding: 15px 10px 40px 0;
         right: 0px;
     }
-
     .message-info {
         padding: 20px 10px 30px 0;
     }

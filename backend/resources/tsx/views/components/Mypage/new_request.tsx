@@ -54,6 +54,7 @@ export class New_request extends React.Component <request_data,State>{
         let images = localStorage.getItem("Images");
         let detail = localStorage.getItem("detail");
         let request = localStorage.getItem("request");
+        localStorage.clear();
 
         if (typeof wishs === 'string') {
             wishs = JSON.parse(wishs);

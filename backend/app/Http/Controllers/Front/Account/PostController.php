@@ -99,6 +99,7 @@ class PostController extends Controller
         $data->is_read = "0";
         $data->comment_id = "3";
         $data->save();
-        return $this->getData();
+        $response = $this->getData();
+        return $response;
     }
 }
