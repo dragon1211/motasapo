@@ -4,11 +4,10 @@ import {PersonInfo, PersonData} from './personInfo';
 import {Map} from './map';
 import axios from "axios";
 import {TopNarBar} from '../topnavbar';
-
-import '../../../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './gps.css';
 import './loader.css';
 import { Link } from 'react-router-dom';
+import {Grid, Button} from '@material-ui/core'
 
 type State={
     total_data: Array<PersonData>
@@ -19,7 +18,6 @@ type State={
     isGetCurPos?: boolean
     isSelected: String
 }
-
 export class GPS extends Component<{}, State> {
 
     intervalID = setInterval(()=>this.getData(), 60000); // Will alert every minute.
@@ -113,11 +111,10 @@ export class GPS extends Component<{}, State> {
 
     saveLocalStorages(){
         window.localStorage.clear();
-        if(this.state.total_data.length == 0) return;
         window.localStorage.setItem('state',JSON.stringify(this.state));
     }
 
-    render1(){
+    render(){
         return (
             <div>
                 <TopNarBar title="GPS"/>
@@ -128,135 +125,62 @@ export class GPS extends Component<{}, State> {
                             <Map markers={this.state.total_data}/>
                         </div>
                         <div className="wrap-info">
-                            <div className="row f">
-                                <div className="col-sm-4 my-1">
-                                    {
-                                        this.state.isSelected == 'all' ? <button className="round-btn selected"  onClick={e=>this.selectAll()}>全て</button>
-                                        : <button className="round-btn"  onClick={e=>this.selectAll()}>全て</button>
-                                    }
-                                </div>
-                                <div className="col-sm-4 my-1">
-                                    {
-                                        this.state.isSelected == 'shop' ?   <button className="round-btn selected"  onClick={e=>this.selectShop()}>ショップのみ</button>
-                                        :  <button className="round-btn"  onClick={e=>this.selectShop()}>ショップのみ</button>
-                                    }
-                                </div>
-                                <div className="col-sm-4 my-1">
-                                    {
-                                        this.state.isSelected == 'user' ?   <button className="round-btn selected"  onClick={e=>this.selectUser()}>ユーザー</button>
-                                        :  <button className="round-btn"  onClick={e=>this.selectUser()}>ユーザー</button>
-                                    }
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-sm-6 my-1">
-                                    {
-                                        this.state.isSelected == 'male' ? <button className="round-btn selected"  onClick={e=>this.selectMale()}>ユーザー：男性のみ</button>
-                                        :  <button className="round-btn"  onClick={e=>this.selectMale()}>ユーザー：男性のみ</button>
-                                    }
-                                </div>
-                                <div className="col-sm-6 my-1">
-                                    {
-                                        this.state.isSelected == 'female' ? <button className="round-btn selected"  onClick={e=>this.selectFemale()}>ユーザー：女性のみ</button>
-                                        : <button className="round-btn"  onClick={e=>this.selectFemale()}>ユーザー：女性のみ</button>
-                                    }
-                                </div>
-                            </div>
+                            <Grid container spacing={1} alignItems={'center'} justifyContent={'center'}>
+                                <Grid container item sm={12} spacing={1} >
+                                    <Grid item sm={4} xs={12}>
+                                        {
+                                            this.state.isSelected == 'all' ? <Button className="round-btn selected"  onClick={e=>this.selectAll()}>全て</Button>
+                                            : <Button className="round-btn"  onClick={e=>this.selectAll()}>全て</Button>
+                                        }
+                                    </Grid>
+                                    <Grid item sm={4} xs={12} >
+                                        {
+                                            this.state.isSelected == 'shop' ?   <Button className="round-btn selected"  onClick={e=>this.selectShop()}>ショップのみ</Button>
+                                            :  <Button className="round-btn"  onClick={e=>this.selectShop()}>ショップのみ</Button>
+                                        }
+                                    </Grid>
+                                    <Grid item sm={4} xs={12} >
+                                        {
+                                            this.state.isSelected == 'user' ?   <Button className="round-btn selected"  onClick={e=>this.selectUser()}>ユーザー</Button>
+                                            :  <Button className="round-btn"  onClick={e=>this.selectUser()}>ユーザー</Button>
+                                        }
+                                    </Grid>
+                                </Grid>
+                                <Grid container item sm={12} spacing={1}>
+                                    <Grid item sm={6} xs={12}>
+                                        {
+                                            this.state.isSelected == 'male' ? <Button className="round-btn selected"  onClick={e=>this.selectMale()}>ユーザー：男性のみ</Button>
+                                            :  <Button className="round-btn"  onClick={e=>this.selectMale()}>ユーザー：男性のみ</Button>
+                                        }
+                                    </Grid>
+                                    <Grid item sm={6} xs={12}>
+                                        {
+                                            this.state.isSelected == 'female' ? <Button className="round-btn selected"  onClick={e=>this.selectFemale()}>ユーザー：女性のみ</Button>
+                                            : <Button className="round-btn"  onClick={e=>this.selectFemale()}>ユーザー：女性のみ</Button>
+                                        }
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                             {
                                 this.state.filter_data.map( (item:any, id:any) =><PersonInfo data = {item} key={id}/> )                                                      
                             }
                         </div>
 
                         <div className="l-nav gps">
-                            <div className="l-nav--items c-flex v-center">
-                                <div className="l-nav--item is-selected">
+                            <Grid container item>
+                                <Grid item sm={6} xs={6} className="l-nav--item is-selected">
                                     <a href="" className="l-nav--link-gps">
                                         <span>G P S</span>
                                     </a>
-                                </div>
-                                <div className="l-nav--item">
-                                    <div className="l-nav--link-gps">
-                                        <button onClick={this.saveLocalStorages}>募集する</button>
-                                    </div>
-                                </div>
-                            </div>
+                                </Grid>
+                                <Grid item sm={6} xs={6} className="l-nav--item">
+                                    <a onClick={this.saveLocalStorages} className="l-nav--link-gps">
+                                        募集する
+                                    </a>
+                                </Grid>
+                            </Grid>
                         </div>
                     </div>) : null
-                }
-            </div>    
-        );
-    }
-
-    render(){
-        return (
-            <div>
-                <TopNarBar title="GPS"/>
-                {
-                   <div className="gps-body">
-                        
-                        <div className="map-size">
-                        {
-                            this.state.isLoading? <Map markers={this.state.total_data}/>
-                            :  <div className="dummy-item-map"/>
-                        }
-                        </div>
-                        <div className="wrap-info">
-                            <div className="row f">
-                                <div className="col-sm-4 my-1">
-                                    {
-                                        this.state.isSelected == 'all' ? <button className="round-btn selected"  onClick={e=>this.selectAll()}>全て</button>
-                                        : <button className="round-btn"  onClick={e=>this.selectAll()}>全て</button>
-                                    }
-                                </div>
-                                <div className="col-sm-4 my-1">
-                                    {
-                                        this.state.isSelected == 'shop' ?   <button className="round-btn selected"  onClick={e=>this.selectShop()}>ショップのみ</button>
-                                        :  <button className="round-btn"  onClick={e=>this.selectShop()}>ショップのみ</button>
-                                    }
-                                </div>
-                                <div className="col-sm-4 my-1">
-                                    {
-                                        this.state.isSelected == 'user' ?   <button className="round-btn selected"  onClick={e=>this.selectUser()}>ユーザー</button>
-                                        :  <button className="round-btn"  onClick={e=>this.selectUser()}>ユーザー</button>
-                                    }
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-sm-6 my-1">
-                                    {
-                                        this.state.isSelected == 'male' ? <button className="round-btn selected"  onClick={e=>this.selectMale()}>ユーザー：男性のみ</button>
-                                        :  <button className="round-btn"  onClick={e=>this.selectMale()}>ユーザー：男性のみ</button>
-                                    }
-                                </div>
-                                <div className="col-sm-6 my-1">
-                                    {
-                                        this.state.isSelected == 'female' ? <button className="round-btn selected"  onClick={e=>this.selectFemale()}>ユーザー：女性のみ</button>
-                                        : <button className="round-btn"  onClick={e=>this.selectFemale()}>ユーザー：女性のみ</button>
-                                    }
-                                </div>
-                            </div>
-                            {
-                                this.state.isLoading ? 
-                                this.state.filter_data.map( (item:any, id:any) =><PersonInfo data = {item} key={id}/> )
-                                : null                                                      
-                            }
-                        </div>
-
-                        <div className="l-nav gps">
-                            <div className="l-nav--items c-flex v-center">
-                                <div className="l-nav--item is-selected">
-                                    <a href="" className="l-nav--link-gps">
-                                        <span>G P S</span>
-                                    </a>
-                                </div>
-                                <div className="l-nav--item">
-                                    <div className="l-nav--link-gps">
-                                        <button onClick={this.saveLocalStorages}>募集する</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 }
             </div>    
         );

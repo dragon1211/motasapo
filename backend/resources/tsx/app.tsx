@@ -29,7 +29,7 @@ require('../tsx/views/components/CategoryList')
 
 require('../tsx/views/pages/accounts/gps/gps/index')
 require('../tsx/views/pages/accounts/gps/detail/index')
-require('../tsx/views/pages/accounts/gps/new/index')
+require('../tsx/views/pages/accounts/gps/new_post/index')
 //-------------------------------------------------------------//
 require('./views/components/Mypage/index')
 

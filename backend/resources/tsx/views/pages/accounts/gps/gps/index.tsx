@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {GPS} from './gps';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import { Detail } from '../detail/detail';
-import { New } from '../new/new';
+import { New_Post } from '../new_post/new_post';
 
 if (document.getElementById('gps')) {
     
@@ -17,7 +17,7 @@ if (document.getElementById('gps')) {
                 <Detail/>
             </Route>
             <Route path="/account/gps/new">
-                <New/>
+                <New_Post/>
             </Route>
         </Switch>
         </BrowserRouter>, document.getElementById('gps'));

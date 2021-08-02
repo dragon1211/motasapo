@@ -31,46 +31,17 @@
     padding: 16px 24px;
 }
 
-.dummy-item-map{
-    border-radius: 4px;
-    background-color: #ddd;
-}
-.dummy-item-text{
-    width: 100%; 
-    height: 12px;
-    background-color: #ddd;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-name: dummyItemShimmer;
-    animation-timing-function: linear;
-    background-image: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
-}
-
-.gps-body .wrap-info .col-sm-4{
-    padding: 0 3px;
-}
-.gps-body .wrap-info .f.row{
-    margin: 0 -3px;
-}
-
 .selected {
     background-color: black;
 }
 
-.gps .l-nav--items{
-    padding: 16px 16px 0px 16px;
-    text-align: center;
-}
-
-.gps .l-nav--item{
-    width: 45%
-}
-
 .gps-body .l-nav{
-    width: 540px;
+    max-width: 540px;
+    width: 100%;
     z-index: 10;
     padding: 0;
+    padding: 16px 16px 0px 16px;
+    text-align: center;
 }
 
 .l-nav--link-gps{
@@ -81,4 +52,5 @@
 } 
 .l-nav--link-gps:hover{
     text-decoration: none;
+    cursor: pointer;
 }

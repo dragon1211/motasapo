@@ -16,7 +16,7 @@ class CreatePostTagsTable extends Migration
         Schema::create('post_tags', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement()->comment('ID');
             $table->foreignId('post_id')->constrained('posts')->comment('投稿ID');
-            $table->string('tag', 50)->comment('タグ');
+            $table->unsignedBigInteger('tag_id')->comment('タグID');
             $table->dateTime('created_at', $precision = 0)->nullable();
             $table->dateTime('updated_at', $precision = 0)->nullable();
         });

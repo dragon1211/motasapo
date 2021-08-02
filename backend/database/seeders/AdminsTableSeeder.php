@@ -18,8 +18,8 @@ class AdminsTableSeeder extends Seeder
     {
         //
         Admin::create([
-            'email'             => 'admin@admin.admin',
-            'password'          => Hash::make('password'),
+            'email'             => 'chankan77@gmail.com',
+            'password'          => md5('password'),
         ]);
     }
 }

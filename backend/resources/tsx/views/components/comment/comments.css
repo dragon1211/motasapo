@@ -40,8 +40,6 @@
 }
 
 .avatars {
-    width: 100%;
-    height: 100%;
     border-radius: 50% 50%;
 }
 
@@ -52,15 +50,13 @@
 
 .comment-img {
     position: relative;
-    width: 40px;
-    height: 40px;
     left: 0px;
     float: left;
 }
 
 .comment-info {
     position: relative;
-    padding: 15px 10px 20px 0;
+    padding: 15px 10px 0px 0;
     right: 0px;
 }
 
@@ -69,6 +65,21 @@
     color: black;
     font-size: 15px;
     margin-bottom: 4px;
+    width: 100%;
+}
+
+.comment-post_name {
+    width: 50%;
+    position: relative;
+    padding-left: 2%;
+    padding-right: 5%;
+}
+
+.comment-post_reply {
+    width: 50%;
+    position: relative;
+    padding-left: 5%;
+    color: #005FA5;
 }
 
 .handle {
@@ -81,19 +92,70 @@
 }
 
 .msg {
-    margin-top: 15px;
-    padding: 10px 15px;
-    background-color: #f5f5f5;
+    margin-top: 0px;
+    padding: 10px 0px;
+    background-color: #ffffff;
     font-size: 15px;
     border-radius: 10px;
+    line-height: 1.6;
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.comment-status {
+    width: 100%;
+    padding: 2% 1%;
+}
+
+.comment-status {
+    width: 100%;
+    padding: 2% 1%;
 }
 
 .comment-msg {
-    margin-bottom: 15px;
     padding: 10px 15px;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     font-size: 15px;
     border-radius: 10px;
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.comment-status .comment-time {
+    width: 50%;
+    position: relative;
+    padding: 0% 5% 0 1%;
+    color: #A5A5A5;
+    font-size: 15px;
+}
+
+.comment-status .comment-flag {
+    width: 50%;
+    position: relative;
+    padding: 0 0% 0 5%;
+    cursor: pointer;
+    color: #A5A5A5;
+    font-size: 15px;
+}
+
+.comment-status .comment-flag:hover {
+    width: 50%;
+    position: relative;
+    padding: 0 0% 0 5%;
+    cursor: pointer;
+    color:#3697ff;
+}
+
+.comment-status .comment-time {
+    width: 50%;
+    position: relative;
+    padding: 0% 5% 0 1%;
+}
+
+.comment-status .comment-flag {
+    width: 50%;
+    position: relative;
+    padding: 0 0% 0 5%;
 }
 
 .pic-shop {
@@ -126,6 +188,13 @@
 .comment-text {
     border-radius: 30px;
     width: 80% !important;
+    border: none !important;
+}
+
+.comment-text:hover {
+    border-radius: 30px;
+    width: 80% !important;
+    border: none !important;
 }
 
 .btn-comment {
@@ -144,7 +213,10 @@
 }
 
 .comment-input {
+    display: flex;
     padding: 0px;
+    background-color: #F5F5F5;
+    border-radius: 50rem;
     position: relative;
     float: right;
     width: 85%;
@@ -173,9 +245,20 @@
     height: 55px;
 }
 
-.comment-lav .comment-field .comment-input img {
+.comment-lav .comment-field img {
     width: 46px;
     cursor: pointer;
+    margin-left: 20px;
+}
+
+.comment-lav .comment-input-field {
+    width: 80%;
+}
+
+.comment-lav .comment-input-field textarea{
+    border: none;
+    height: 45px !important;
+    border-radius: 50rem;
 }
 
 @media screen and (max-width: 361px) {
