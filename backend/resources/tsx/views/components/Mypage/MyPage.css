@@ -181,8 +181,7 @@ input[type="file"] {
     position :absolute;
     width: 101px;
     height: 101px;
-
-
+    object-fit: contain;
   }
 
 /* The container */

@@ -93,12 +93,14 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('account')->name('accoun
     Route::get('/post', function() {
         return view('accounts.index');
     });
+    Route::get('/new_post', [PostController::class, 'post_new']);
+    Route::post('/new_post/store', [PostController::class, 'post_store']);
+    Route::get('/new_post/get_tags', [PostController::class, 'get_tags']);
 
     Route::get('/gps', [GpsController::class, 'index']);
     Route::get('/gps/detail/{id}', [GpsController::class, 'detail']);
-    Route::get('/gps/new', [GpsController::class, 'new']);
     Route::post('/gps/api', [GpsController::class, 'getdata']);
-
+    
     // チャットルームのページを返却
     Route::get('/chatroom', function() {
         return view("accounts.messages.index");
@@ -165,6 +167,8 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('shop')->name('shop.')->
 // Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//start admin page
 Route::get('/motasapo-admin/login', [LoginController::class, 'admin_login'])->name('admin_login');
 Route::post('/motasapo-admin/login', [LoginController::class, 'admin_check'])->name('admin.login');
 Route::get('/motasapo-manager/user', [ManagerController::class, 'index'])->name('manager');
+//end admin page

@@ -17,6 +17,7 @@ interface Data{
 
 type State = {
     SAMPLE_IMAGES:Array<Data>
+    current_pos: number
 }
 
 export class NewImages extends React.Component<{},State>{
@@ -27,7 +28,8 @@ export class NewImages extends React.Component<{},State>{
         for(let i=0; i<20; i++){   images.push({id:i, imgUri:'', flag: false}); }
 
         this.state = {
-            SAMPLE_IMAGES : [...images]
+            SAMPLE_IMAGES : [...images],
+            current_pos : 0
         }
     }
 
@@ -43,36 +45,40 @@ export class NewImages extends React.Component<{},State>{
         console.log(id);
         var reader = new FileReader();
         let _file = e.target.files[0];
-
         reader.readAsDataURL(_file);
-
+        
         reader.onloadend = () => {
            var images = this.state.SAMPLE_IMAGES;
-            for(let i = 0; i < images.length; i++)
-            {   
-                if(i == id){
-                    images[i].flag = true;
-                    images[i].imgUri = reader.result;
-                }
-            }
+           let t = this.state.current_pos;
+                images[t].flag = true;
+                images[t].imgUri = reader.result;  
             this.setState({
-                SAMPLE_IMAGES : [... images]
+                SAMPLE_IMAGES : [... images],
+                current_pos : t+1
             })
         };
     };
 
     removeImg(id:any){
         var images = this.state.SAMPLE_IMAGES;
-        for(let i=0; i < images.length; i++)
-        {   
-            if(i == id){
-                images[i].imgUri = images[i+1].imgUri;
-                images[i+1].flag = false;
-                images[i+1].imgUri = '';
-            }
+        let t = this.state.current_pos;
+        for(let i=id; i<t-1; i++){
+            images[i].imgUri = images[i+1].imgUri;
+            images[i].flag = images[i+1].flag;
         }
+        images[t-1].imgUri = '';
+        images[t-1].flag = false;
+        // for(let i=0; i < images.length; i++)
+        // {   
+        //     if(i == id){
+        //         images[i].imgUri = images[i+1].imgUri;
+        //         images[i+1].flag = false;
+        //         images[i+1].imgUri = '';
+        //     }
+        // }
         this.setState({
-            SAMPLE_IMAGES : [... images]
+            SAMPLE_IMAGES : [... images],
+            current_pos : t-1
         })
     }
 

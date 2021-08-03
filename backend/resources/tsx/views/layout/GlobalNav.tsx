@@ -60,10 +60,9 @@ export default function GlobalNav() {
           </div>
 
           <div className="l-nav--item">
-
-            <Link to="/account/new-post/" className="l-nav--link link-camera">
+            <a href="/account/new_post" className="l-nav--link link-camera">
               <FaCameraRetro className="icon-layout" />
-            </Link>
+            </a>
           </div>
 
           <div className="l-nav--item">

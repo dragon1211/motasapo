@@ -11,6 +11,6 @@ class PostTag extends Model
     protected $table = 'post_tags';
     protected $fillable = [
         'post_id',
-        'tag'
+        'tag_id'
     ];
 }

@@ -18,11 +18,7 @@ class GpsController extends Controller
     }
 
     public function detail($id){
-        return view('accounts.gpss.show');
-    }
-
-    public function new(){
-        return view('accounts.gpss.new');
+        return view('accounts.gpss.detail');
     }
 
     public function getPosition($strPos){
@@ -149,7 +145,7 @@ class GpsController extends Controller
                     $male['type'] = "male";
                     $male['position'] = $this->getPosition($item->location);
                     $male['distance'] = floor($dis*1000);
-                    $male['started'] = $this->getTime($post_arr[0]->updated_at);;
+                    $male['started'] = $this->getTime($post_arr[0]->updated_at);
                     $male['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
                     $male['pic'] = $item->img;
                     $male['msgbox'] =[$item->profile];
