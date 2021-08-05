@@ -96,6 +96,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('account')->name('accoun
     Route::get('/new_post', [PostController::class, 'post_new']);
     Route::post('/new_post/store', [PostController::class, 'post_store']);
     Route::get('/new_post/get_tags', [PostController::class, 'get_tags']);
+    Route::post('/post/thanks', [PostController::class, 'thanks_store']);
 
     Route::get('/gps', [GpsController::class, 'index']);
     Route::get('/gps/detail/{id}', [GpsController::class, 'detail']);
@@ -121,8 +122,10 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('account')->name('accoun
     Route::get('/request/new/type', [RequestController::class,'newtype']);
     Route::get('/request/new/vehicle', [RequestController::class,'new_vehicle']);
     Route::get('/request/new/image', [RequestController::class,'new_image']);
+    Route::post('/request/new/uploadimages', [RequestController::class,'uploadimages']);
     Route::get('/request/new/detail', [RequestController::class,'new_detail']);
     Route::get('/request/new/request', [RequestController::class,'new_request']);
+    Route::get('/request/new/request_data', [RequestController::class,'new_request_data']);
     Route::get('/request/new/complete', [RequestController::class,'view_new_complete']); 
     Route::post('/request/new/complete', [RequestController::class,'new_complete']);
 

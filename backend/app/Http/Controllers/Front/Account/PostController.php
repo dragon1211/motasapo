@@ -15,6 +15,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use App\Models\PostTag;
 use App\Models\PostImage;
+use App\Models\PostLike;
 
 class PostController extends Controller
 {
@@ -27,32 +28,51 @@ class PostController extends Controller
     }
 
     public function post_store(Request $request){
-        $req = $request->validate([
-            'tags'=>'nullable',
-            'post_msg'=>'nullable',
-            'imgs'=>'nullable'
-        ]);
+
+        $tags = json_decode($request->get('tags'));
+        $post_msg = json_decode($request->get('post_msg'));
 
         //---------------------------------save into posts table
         Post::create([
-            'type'=>0,
+            'type'=>Account::where('id', Auth::id())->first()->type,
             'account_id'=>Auth::id(),
-            'text'=>$req['post_msg'],
+            'text'=>$post_msg,
             'limit_at'=> now()
         ]);
         $post_id = Post::all()->last()->id;
 
         //----------------------------------save into tags & post_tags table
-        foreach($req['tags'] as $tag ){
-            $cnt = Tag::where('name',$tag['name'])->count();
+        foreach($tags as $tag ){
+            $cnt = Tag::where('name',$tag->name)->count();
             if($cnt==0) 
-                Tag::create(['name'=> $tag['name']]);
+                Tag::create(['name'=> $tag->name]);
 
             //----------------------------------------------save post_tags tables
-            $tag_id = Tag::where('name', $tag['name'])->first();
+            $tag_id = Tag::where('name', $tag->name)->first();
             PostTag::create([
                 'post_id'=>$post_id, 
                 'tag_id'=>$tag_id->id
+            ]);
+        }
+
+        //----------------------------------save into post_images table-------image 
+        
+        $urls = [];
+        $path = 'images/post_images/';
+        if ($request->get('images')) {
+            foreach ($request->get('images') as $file) {
+                $name = time(). rand(1, 100) . '.' . explode('/', explode(':', substr($file, 0, strpos($file, ';')))[1])[1];
+                $replace = substr($file, 0, strpos($file, ',')+1); 
+                $image = str_replace($replace, '', $file); 
+                $image = str_replace(' ', '+', $image);     
+                \File::put(public_path($path). $name, base64_decode($image));
+                array_push($urls, '/'.$path.$name);
+            }
+        }
+        foreach( $urls as $url){
+            PostImage::create([
+                'post_id'=>$post_id,
+                'url' => $url
             ]);
         }
         return 'success';
@@ -69,6 +89,19 @@ class PostController extends Controller
             array_push($response, $temp);
         }
         return $response;
+    }
+
+    public function thanks_store(Request $request){
+        $post_id = $request->get('post_id');
+        $method = $request->get('method');
+        $cnt = PostLike::where(['account_id'=>Auth::id(), 'post_id'=>$post_id])->count();
+        if($cnt==0 && $method == 'add'){
+            PostLike::create(['post_id'=>$post_id, 'account_id'=>Auth::id()]);
+        }
+        else if($cnt == 1 && $method == 'remove'){
+            PostLike::where(['account_id'=>Auth::id(), 'post_id'=>$post_id])->delete();
+        }
+        return 'success';
     }
 
     //------------------------------------------------------------------------------------------

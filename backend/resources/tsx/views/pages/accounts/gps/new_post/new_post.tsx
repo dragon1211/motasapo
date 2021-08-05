@@ -31,20 +31,19 @@ type State={
   anchorEl:any,
   first_img_src:any | undefined
   upload_images:any| undefined
-  post_msg:string | undefined
+  post_msg:any | undefined
 }
 
 export class New_Post extends React.Component<{},State> {
 
     constructor(props:any) {
       super(props);
-      const val = {id:1, name:"apple", disabled: true}
       this.state = {
         tags: [],
         suggestions: [],
         anchorEl: null,
         first_img_src: undefined,
-        upload_images: undefined,
+        upload_images: [],
         post_msg: '',
       };
     }
@@ -99,12 +98,26 @@ export class New_Post extends React.Component<{},State> {
       e.preventDefault();
       var val = e.target.value;
       if(e.target.id=='img-upload'){
-          let _file = e.target.files[0]
-          let reader = new FileReader();
-          reader.readAsDataURL(_file);
-          reader.onloadend = () => {
-          this.setState({ first_img_src: reader.result, upload_images: [...e.target.files]})
-        };
+ 
+          const files = Array.from(e.target.files);
+          const promises = files.map((file:any) => {
+              return (new Promise((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.addEventListener('load', (ev:any) => {
+                      resolve(ev.target.result);
+                  });
+                  reader.addEventListener('error', reject);
+                  reader.readAsDataURL(file);
+              }))
+          });
+
+          Promise.all(promises).then(images => {
+              this.setState({
+                upload_images: images,
+                first_img_src: images[0]
+              })
+          }, error => { console.error(error); });
+
       }
       else if(e.target.id=='post-msg'){
          this.setState({ post_msg: val })
@@ -137,13 +150,18 @@ export class New_Post extends React.Component<{},State> {
       </>
     )
 
-    handleSubmit = () => {
-      var req = { 
-        tags: this.state.tags,
-        post_msg: this.state.post_msg,
-        imgs: this.state.first_img_src
-      }
-      axios.post('/account/new_post/store', req)
+    handleSubmit = (e:any) => {
+      e.preventDefault();
+      const formdata = new FormData();
+      formdata.append('tags', JSON.stringify(this.state.tags));
+      formdata.append('post_msg', JSON.stringify(this.state.post_msg));
+
+      this.state.upload_images.forEach((image_file:any) => {
+        console.log(image_file);
+        formdata.append('images[]', image_file);
+      });
+
+      axios.post('/account/new_post/store', formdata)
       .then(response => {
         if(response.data=="success"){
           window.location.href = '/account/post';
@@ -155,14 +173,15 @@ export class New_Post extends React.Component<{},State> {
         <>
          <TopNarBar title="LOGO"/>
             <div className="new-body">
+              <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
                 <div className="p-20">
                     <label className="form-label" >画像（最大10枚）</label>
                     {  this.state.first_img_src!=null? this.image_upload_button() : this.dropdown_menu_button() }
-                    <input accept="image/*" id="img-upload" type="file" name="img-upload" onChange={this.handleChange.bind(this)} multiple/>
+                    <input accept="image/*" id="img-upload" type="file" name="upload_images[]" onChange={this.handleChange.bind(this)} multiple/>
                 </div>
                 <div className="p-20">
                     <label className="form-label" htmlFor="post-msg">本文（最大1000文字）</label>
-                    <textarea className=" post-text form-control" id="post-msg" rows = {7} name="msg" onChange={this.handleChange.bind(this)}/>
+                    <textarea className=" post-text form-control" id="post-msg" rows = {7} name="msg" onChange={this.handleChange.bind(this)} required/>
                 </div>
                 <div className="p-20" style={{zIndex: 10}}>
                     <label className="form-label" htmlFor="tag-input">タグ（最大5つ）</label>
@@ -171,8 +190,9 @@ export class New_Post extends React.Component<{},State> {
                       onAddition={this.handleAddition.bind(this)}/>
                 </div>
                 <div className="p-20">
-                    <button className="collect-btn" onClick={this.handleSubmit}>投稿する</button>
+                    <button type="submit" className="collect-btn" >投稿する</button>
                 </div>
+              </form>
             </div>
         </>
       );

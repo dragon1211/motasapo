@@ -15,11 +15,11 @@ class PostImagesTableSeeder extends Seeder
      */
     public function run()
     {
-        PostImage::create([
-            'post_id'        => 1,
-            'url'            => '/storage/base/sample_human1.png',
-            'created_at'     => now(),
-            'updated_at'     => now(),
-        ]);
+        // PostImage::create([
+        //     'post_id'        => 1,
+        //     'url'            => '/storage/base/sample_human1.png',
+        //     'created_at'     => now(),
+        //     'updated_at'     => now(),
+        // ]);
     }
 }

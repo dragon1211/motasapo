@@ -8,5 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Prefecture extends Model
 {
     use HasFactory;
-    protected $table = "prefectures";
+    
+
+
+    public function getAll()
+    {
+        $prefectures = Prefecture::select('name');
+        return $prefectures;
+    }
 }

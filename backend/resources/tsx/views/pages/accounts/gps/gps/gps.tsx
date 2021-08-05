@@ -180,7 +180,7 @@ export class GPS extends Component<{}, State> {
                                 </Grid>
                             </Grid>
                         </div>
-                    </div>) : null
+                    </div>) : <div className="gps-body"><div className="u-align__center">データが存在していません。</div></div>
                 }
             </div>    
         );

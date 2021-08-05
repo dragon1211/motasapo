@@ -7,4 +7,6 @@ export type Post = {
     limit_at: Date;
     created_at: Date;
     updated_at: Date;
+    post_images: Array<any>
+    post_likes: Array<any>
 };

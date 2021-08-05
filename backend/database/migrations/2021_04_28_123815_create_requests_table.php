@@ -16,8 +16,8 @@ class CreateRequestsTable extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement()->comment('ID');
             $table->foreignId('account_id')->constrained('accounts')->comment('アカウントID');
-            $table->boolean('type')->comment('リクエストタイプ');
-            $table->boolean('target')->comment('対象物');
+            $table->string('type', 255)->comment('リクエストタイプ');
+            $table->string('target', 255)->comment('対象物');
             $table->string('brand', 255)->comment('メッセージ画像');
             $table->string('vehicle', 255)->comment('メッセージ画像');
             $table->string('grade', 255)->comment('メッセージ画像');

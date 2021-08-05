@@ -8,6 +8,7 @@ import {
     Route,
     Link
 } from 'react-router-dom';
+import axios from "axios";
 
 interface Data{
     id:number
@@ -34,8 +35,24 @@ export class NewImages extends React.Component<{},State>{
     }
 
     handleNext = ()=> {
-        console.log(JSON.stringify({"Images":this.state.SAMPLE_IMAGES}));
-        localStorage.setItem("Images", JSON.stringify({"Images":this.state.SAMPLE_IMAGES}))
+        console.log(JSON.stringify({"images":this.state.SAMPLE_IMAGES}));
+        const data = new FormData();
+        data.append("images", JSON.stringify(this.state.SAMPLE_IMAGES));
+        
+        axios({
+            method: "post",
+            url: "/account/request/new/uploadimages",
+            data: data,
+            headers: { "Content-Type": "multipart/form-data"}
+           }).then((res:any)=>{
+                // console.log(JSON.parse(res));
+                console.log(res.data);
+                // window.location.assign("/account/mypage");
+                
+           }).catch((error:any)=>{
+                console.log('err')
+           });
+        // localStorage.setItem("images", JSON.stringify({"images":this.state.SAMPLE_IMAGES}))
     }
      
    

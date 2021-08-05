@@ -23,7 +23,7 @@ Product customer testimonials and message between customers function know the ne
             このページは、画像とメッセージを自分のパートナーに送信するための画像アップロードページです。(This page is image upload page to send image and message to own partner.)
         </dl>
     </li>
-    <li>[gps_map.jpg]
+    <li>[gps_map.png]
         <dl>
             このページは、彼らの場所から最短距離にあるパートナーやショップの位置を示しています。(This page shows the position of partners and shops where there are in the shortest way from their place.)
         </dl>
@@ -57,8 +57,8 @@ Product customer testimonials and message between customers function know the ne
 <img src="./info/gps_img_upload.jpg" width="440px" height="700px"/>
 <hr>
 
-<h4>[gps_map.jpg]</h4>
-<img src="./info/gps_map.jpg" width="440px" height="700px"/>
+<h4>[gps_map.png]</h4>
+<img src="./info/gps_map.png" width="440px" height="700px"/>
 <hr>
 
 <h4>[gps_message.jpg]</h4>
