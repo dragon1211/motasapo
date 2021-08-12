@@ -3,7 +3,7 @@ import {PersonInfo, PersonData} from './personInfo';
 // import {test_data} from './test';
 import {Map} from './map';
 import axios from "axios";
-import {TopNarBar} from '../topnavbar';
+import {Header} from '../../../../layout/Header';
 import './gps.css';
 import './loader.css';
 import { Link } from 'react-router-dom';
@@ -14,64 +14,59 @@ type State={
     filter_data: Array<PersonData>
     latitude?:number
     longitude?:number
-    isLoading?: boolean
+    status?: string
     isGetCurPos?: boolean
     isSelected: String
 }
 export class GPS extends Component<{}, State> {
-
+    _isMounted = false;
     intervalID = setInterval(()=>this.getData(), 60000); // Will alert every minute.
 
     constructor(Props: any){
         super(Props);  
-        var state = window.localStorage.getItem('state');
-        if(state != null){
-            this.state = {
-                total_data: [...JSON.parse(state).total_data],
-                filter_data: [...JSON.parse(state).total_data],
-                latitude: JSON.parse(state).latitude,
-                longitude: JSON.parse(state).longitude,
-                isLoading: JSON.parse(state).isLoading,
-                isSelected: 'all'
-            };
-        } 
-        else{
-            this.state = {
-                total_data: [],
-                filter_data: [],
-                latitude: 0,
-                longitude: 0,
-                isLoading: false,
-                isSelected: 'all'
-            };
-            this.getData();
-        } 
-        this.saveLocalStorages = this.saveLocalStorages.bind(this)
+        this.state = {
+            total_data: [],
+            filter_data: [],
+            latitude: 0,
+            longitude: 0,
+            status: '',
+            isSelected: 'all'
+        };
     }
 
     componentWillUnmount() {
+        this._isMounted = false;
         clearInterval(this.intervalID);
-        this.saveLocalStorages()
     }
 
+    componentDidMount  = () => {
+        this._isMounted = true;
+        this.getData();
+    }
+
+
     getData =  () =>{
-         navigator.geolocation.getCurrentPosition(position => {
-            this.setState(
-            {
-                latitude: position.coords.latitude,
-                longitude:  position.coords.longitude
+        if(this._isMounted){
+            navigator.geolocation.getCurrentPosition(position => {
+                this.setState(
+                {
+                    latitude: position.coords.latitude,
+                    longitude:  position.coords.longitude
+                });
+                var curPos = { lat: this.state.latitude, lng: this.state.longitude };
+                axios.post('/account/gps/api', curPos)
+                .then(response=>{
+                    var res = (response.data); 
+                    this.setState({
+                        total_data : [...res],
+                        filter_data: [...res],
+                        status: 'loaded'
+                    })
+                }).catch(err=>{
+                    this.setState({status: 'failed'});
+                })
             });
-            var curPos = { lat: this.state.latitude, lng: this.state.longitude };
-            axios.post('/account/gps/api', curPos)
-            .then(response=>{
-                 var res = (response.data); 
-                 this.setState({
-                     total_data : [...res],
-                     filter_data: [...res],
-                     isLoading: true
-                 })
-            })
-        });
+        }
     }
 
     selectAll(){
@@ -109,17 +104,12 @@ export class GPS extends Component<{}, State> {
             this.setState({ filter_data: [...items], isSelected : 'user' })
     }
 
-    saveLocalStorages(){
-        window.localStorage.clear();
-        window.localStorage.setItem('state',JSON.stringify(this.state));
-    }
-
     render(){
         return (
             <div>
-                <TopNarBar title="GPS"/>
+                <Header title="GPS"/>
                 {
-                    this.state.isLoading ? 
+                    this.state.status == 'loaded' ? 
                     (<div className="gps-body">
                         <div className="map-size">
                             <Map markers={this.state.total_data}/>
@@ -174,13 +164,13 @@ export class GPS extends Component<{}, State> {
                                     </a>
                                 </Grid>
                                 <Grid item sm={6} xs={6} className="l-nav--item">
-                                    <a onClick={this.saveLocalStorages} className="l-nav--link-gps">
+                                    <a className="l-nav--link-gps">
                                         募集する
                                     </a>
                                 </Grid>
                             </Grid>
                         </div>
-                    </div>) : <div className="gps-body"><div className="u-align__center">データが存在していません。</div></div>
+                    </div>) : <div className="gps-body"><div className="u-align__center">Loading...</div></div>
                 }
             </div>    
         );

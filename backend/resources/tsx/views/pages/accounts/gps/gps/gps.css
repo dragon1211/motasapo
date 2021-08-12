@@ -31,6 +31,12 @@
     padding: 16px 24px;
 }
 
+@media screen and (max-width: 375px){
+    .gps-body .wrap-info {
+        padding: 10px;
+    }
+}
+
 .selected {
     background-color: black;
 }

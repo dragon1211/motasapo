@@ -29,10 +29,10 @@ require('../tsx/views/components/CategoryList')
 
 require('../tsx/views/pages/accounts/gps/gps/index')
 require('../tsx/views/pages/accounts/gps/detail/index')
-require('../tsx/views/pages/accounts/gps/new_post/index')
+require('../tsx/views/pages/accounts/new_post/index')
 //-------------------------------------------------------------//
-require('./views/components/Mypage/index')
+require('../tsx/views/pages/accounts/Mypage/index')
 
 require('../tsx/views/pages/accounts/index')
 
-require('../tsx/views/components/comment/index')
+require('../tsx/views/pages/accounts/comment/index')

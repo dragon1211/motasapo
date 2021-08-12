@@ -1,0 +1,57 @@
+.new-body{
+    padding: 70px 24px 10px;
+    font-size: 1em;
+}
+
+.addPic-btn, .collect-btn{
+    width: 100% !important;
+    border-radius: 5px !important;
+    text-align: center !important;
+    min-height: 45px !important;
+    font-size: 1.2rem!important;
+    color: white!important;
+}
+.addPic-btn{
+    background-color: #005FA5!important;
+}
+
+.addPic-btn:after {
+    content: "\002B";
+    color: white;
+    font-size: 1.2rem;
+}
+.collect-btn{
+    background-color: black!important;
+    min-width: 64px;
+    box-sizing: border-box;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+.collect-btn:focus{
+    opacity: .9;
+    transition: 0.3s
+   
+}
+
+.p-20{
+    padding: 15px 0;
+}
+
+.msg-input{
+    width: 100%;
+    min-height: 150px;
+}
+.tag-input{
+    width: 100%;
+    min-height: 70px;
+}
+
+.new-body label{
+    font-size: 1em;
+    margin-bottom: 3px;
+}
+
+.post-text{
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+}

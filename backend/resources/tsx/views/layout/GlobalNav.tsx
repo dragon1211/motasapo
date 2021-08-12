@@ -18,7 +18,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { MyPageIndex } from '../components/Mypage/mypage';
+import { MyPageIndex } from '../pages/accounts/Mypage/mypage';
 import { GPS } from '../pages/accounts/gps/gps/gps';
 
 export default function GlobalNav() {

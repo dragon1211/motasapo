@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -15,8 +16,9 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::with('postImages')->with('postTags')->with('postLikes')->with('postViews')->limit(20)->offset($request->offset)->get();
-        return $posts;
+        $res["posts"] = Post::orderBy('id', 'DESC')->with('account')->with('postImages')->with('postTags')->with('postLikes')->with('postViews')->limit(10)->offset((int)$request->offset)->get();
+        $res["user_id"] = Auth::id();
+        return $res;
     }
 
     /**

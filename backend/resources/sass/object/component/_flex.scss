@@ -24,7 +24,9 @@
         flex-wrap: wrap;
     }
 }
-.c-flex, .c-flex__sp, .c-flex__pc {
+.c-flex,
+.c-flex__sp,
+.c-flex__pc {
     &.v-center {
         // 高さ：中央揃え
         -webkit-box-align: center;

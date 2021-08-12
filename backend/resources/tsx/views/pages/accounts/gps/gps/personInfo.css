@@ -1,5 +1,5 @@
 
-.personInfo {
+.gps-body .personInfo {
     margin: 15px 0 0 0;
     padding: 15px 0 0 0;
     border-top: 1px solid rgb(226, 221, 221);
@@ -41,6 +41,12 @@
     margin:0px;
 }
 
+@media screen and (max-width: 375px){
+    .gps-body  .info{
+        left: 55px;
+    }
+}
+
 .gps-body .name {
     font-weight: bold;
     color:black;
@@ -68,8 +74,8 @@
 
 .gps-body .pic-shop{
     position: absolute;
-    width: 34px;
-    height: 34px;
+    width: 28px;
+    height: 28px;
     left: 40%;
 }
 

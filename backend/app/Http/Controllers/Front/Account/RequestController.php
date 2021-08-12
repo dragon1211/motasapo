@@ -36,7 +36,9 @@ class RequestController extends Controller
    public function uploadimages(Request $request)
    {
     $new_images = json_decode($request->input('images'));
+
     for ($i=0; $i < 20; $i++) { 
+        
         if ($new_images[$i]->flag) {
            
             $image_64 = $new_images[$i]->imgUri;
@@ -54,7 +56,9 @@ class RequestController extends Controller
 
             $imageName = 'moto_'.$i.'_'.time().'.'.$extension;
 
-            Storage::disk('public')->put($imageName, base64_decode($image));
+            // Storage::disk('public')->put($imageName, base64_decode($image));
+            $path = 'images/request-images/';
+            \File::put(public_path($path). $imageName, base64_decode($image));
 
             $request_id = RequestModel::all()->last()->id;
 
@@ -64,6 +68,7 @@ class RequestController extends Controller
             ]);
         }
     }
+    return "sucess";
    }
 
    public function new_detail()
@@ -110,12 +115,7 @@ class RequestController extends Controller
             'remark' => $new_request->Remarks,
         ]);
 
-        
-
-
-
-
-        return "new_images";
+        return "sucess";
         
    } 
    public function view_new_complete()

@@ -1,5 +1,5 @@
 import React from 'react';
-import {TopNarBar} from '../topnavbar';
+import {Header} from '../../../../layout/Header'
 import './detail.css';
 
 const perInfo = {
@@ -13,7 +13,7 @@ const perInfo = {
 export const Detail=()=>{
     return(
     <div>
-        <TopNarBar title="LOGO"/>    
+        <Header title="LOGO"/>    
         <div className="detail-body">
             <div style={{padding:'20px 0 0'}}>
                 <img className="avatar" src={`/storage/base/${perInfo.pic}`} alt={perInfo.pic}/>

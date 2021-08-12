@@ -19,10 +19,14 @@ use App\Models\PostLike;
 
 class PostController extends Controller
 {
-    public function postIndex() {
-        
+    
+    public function index(Request $request)
+    {
+        $res["posts"] = Post::orderBy('id', 'DESC')->with('account')->with('postImages')->with('postTags')->with('postLikes')->with('postViews')->limit(10)->offset($request->offset)->get();
+        $res["user_id"] = Auth::id();
+        return $res;
     }
-
+    
     public function post_new(){
         return view('accounts.posts.new');
     }

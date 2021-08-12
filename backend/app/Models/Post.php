@@ -53,4 +53,10 @@ class Post extends Model
     {
         return $this->hasMany(PostView::class);
     }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
+
 }

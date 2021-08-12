@@ -93,6 +93,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('account')->name('accoun
     Route::get('/post', function() {
         return view('accounts.index');
     });
+    Route::get('/api/posts', [PostController::class, 'index']);
     Route::get('/new_post', [PostController::class, 'post_new']);
     Route::post('/new_post/store', [PostController::class, 'post_store']);
     Route::get('/new_post/get_tags', [PostController::class, 'get_tags']);

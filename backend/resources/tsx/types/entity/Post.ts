@@ -9,4 +9,6 @@ export type Post = {
     updated_at: Date;
     post_images: Array<any>
     post_likes: Array<any>
+    post_tags: Array<any>
+    account: any
 };
