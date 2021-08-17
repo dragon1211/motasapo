@@ -84,10 +84,10 @@ export class New_Post extends React.Component<{},State> {
     image_upload_button = ( ) =>(
         <Grid container item xs={12}>
             <Grid item sm={2} xs={3} style={{width:'70px', height:'70px'}}>
-                <img src={this.state.first_img_src} width='100%' height='100%'/>
+                <img src={this.state.first_img_src} style={{width: '100%',  height: '100%',  objectFit: 'contain', backgroundColor:'#eeeedd'}}/>
             </Grid>
             <Grid item sm={10} xs={9}>
-                <div className="pl-2" style={{paddingTop:'12px'}}>
+                <div className="pl-2" style={{paddingTop:'11px'}}>
                     {this.dropdown_menu_button()}
                 </div>
             </Grid>

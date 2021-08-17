@@ -105,7 +105,8 @@ class PostController extends Controller
         else if($cnt == 1 && $method == 'remove'){
             PostLike::where(['account_id'=>Auth::id(), 'post_id'=>$post_id])->delete();
         }
-        return 'success';
+        $res = $this->index($request);
+        return $res;
     }
 
     //------------------------------------------------------------------------------------------
