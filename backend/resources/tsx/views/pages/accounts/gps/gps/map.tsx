@@ -45,7 +45,7 @@ const MyMap:React.FC<Props> = (props)=>{
           {
              case "male": image = '/storage/base/icon-pin-blue.png'; break;
              case "female": image = '/storage/base/icon-pin-red.png'; break;
-             case "user": {image = '/storage/base/icon-pin-black.png';} break;
+             case "user": image = '/storage/base/icon-pin-black.png'; break;
              case "shop": image = '/storage/base/icon-shop.png'; break;
              default: return;
           }

@@ -17,6 +17,8 @@ type State={
     status?: string
     isGetCurPos?: boolean
     isSelected: String
+    map_width?: number
+    map_height?: number
 }
 export class GPS extends Component<{}, State> {
     _isMounted = false;
@@ -30,18 +32,23 @@ export class GPS extends Component<{}, State> {
             latitude: 0,
             longitude: 0,
             status: '',
-            isSelected: 'all'
+            isSelected: 'all',
+            map_width: 0,
+            map_height: 0,
         };
     }
 
     componentWillUnmount() {
         this._isMounted = false;
         clearInterval(this.intervalID);
+        window.removeEventListener('resize', this.handleResize);
     }
 
     componentDidMount  = () => {
         this._isMounted = true;
         this.getData();
+        window.addEventListener('resize', this.handleResize)
+        this.handleResize()
     }
 
 
@@ -104,14 +111,19 @@ export class GPS extends Component<{}, State> {
             this.setState({ filter_data: [...items], isSelected : 'user' })
     }
 
+    handleResize = () => {
+        var w = document.getElementById('gps')?.clientWidth;
+        var h;
+        if(w) h = w;
+        this.setState({map_width: w, map_height: h})
+    }
+
     render(){
         return (
             <div>
                 <Header title="GPS"/>
-                {
-                    this.state.status == 'loaded' ? 
-                    (<div className="gps-body">
-                        <div className="map-size">
+                    <div className="gps-body">
+                        <div style={{width:`${this.state.map_width}`, height: `${this.state.map_height}`}}>
                             <Map markers={this.state.total_data}/>
                         </div>
                         <div className="wrap-info">
@@ -152,7 +164,9 @@ export class GPS extends Component<{}, State> {
                                 </Grid>
                             </Grid>
                             {
-                                this.state.filter_data.map( (item:any, id:any) =><PersonInfo data = {item} key={id}/> )                                                      
+                                this.state.status == 'loaded' ? 
+                                    this.state.filter_data.map( (item:any, id:any) =><PersonInfo data = {item} key={id}/> )  
+                                :  <div className="gps-body"><div className="u-align__center">データが存在していません。</div></div>                                                  
                             }
                         </div>
 
@@ -170,8 +184,7 @@ export class GPS extends Component<{}, State> {
                                 </Grid>
                             </Grid>
                         </div>
-                    </div>) : <div className="gps-body"><div className="u-align__center">Loading...</div></div>
-                }
+                    </div>
             </div>    
         );
     }

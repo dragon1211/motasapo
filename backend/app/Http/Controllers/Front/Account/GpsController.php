@@ -64,14 +64,14 @@ class GpsController extends Controller
             'lat'=>'nullable',
             'lng'=>'nullable'
         ]);
-        ///////////////////////////////////////////////////////////
+
         for($i=0; $i<4; $i++)
         {
             $lat = rand(3539300, 3539800)/100000;
             $lng = rand(13869000, 13869800)/100000;
             $shop[$i] = ['lat'=>$lat, 'lng'=>$lng];
         }
-        // $user_pos = ['lat'=>35.395, 'lng'=>138.6940];
+
         for($i=1; $i<=20; $i++)
         {
             $lat = rand(3539300, 3539800)/100000;
@@ -80,8 +80,7 @@ class GpsController extends Controller
                 'location'=> ((string)$lat.', '.$lng)
             ]);
         }
-        /////////////////////////////////////////////////////////////
-        
+            
         $user_id = Auth::id();
         $cnt = Location::where('account_id', $user_id)->count();
         $location = (string)$user_pos['lat'].', '.$user_pos['lng'];
@@ -126,8 +125,11 @@ class GpsController extends Controller
                 $user['type'] = "user";
                 $user['position'] = $user_pos;
                 $user['distance'] = 0;
-                $user['started'] = $this->getTime($post_arr[0]->updated_at);
-                $user['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
+                // $user['started'] = $this->getTime($post_arr[0]->updated_at);
+                // $user['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
+                $user['started'] = "19:00";
+                $user['finished'] = "20:00";
+
                 $user['pic'] = $item->img;
                 $user['msgbox'] = [$item->profile];
                 continue;
@@ -145,8 +147,11 @@ class GpsController extends Controller
                     $male['type'] = "male";
                     $male['position'] = $this->getPosition($item->location);
                     $male['distance'] = floor($dis*1000);
-                    $male['started'] = $this->getTime($post_arr[0]->updated_at);
-                    $male['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
+                    // $male['started'] = $this->getTime($post_arr[0]->updated_at);
+                    // $male['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
+                    $male['started'] = "19:00";
+                    $male['finished'] = "20:00";
+
                     $male['pic'] = $item->img;
                     $male['msgbox'] =[$item->profile];
                 }
@@ -161,8 +166,11 @@ class GpsController extends Controller
                     $female['type'] = "female";
                     $female['position'] = $this->getPosition($item->location);
                     $female['distance'] = floor($dis*1000);
-                    $female['started'] = $this->getTime($post_arr[0]->updated_at);;
-                    $female['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
+                    // $female['started'] = $this->getTime($post_arr[0]->updated_at);;
+                    // $female['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
+                    $female['started'] = "19:00";
+                    $female['finished'] = "20:00";
+
                     $female['pic'] = $item->img;
                     $female['msgbox'] = [$item->profile];
                 }

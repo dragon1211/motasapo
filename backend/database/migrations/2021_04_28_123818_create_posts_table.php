@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('id')->autoIncrement()->comment('ID');
             $table->boolean('type')->comment('投稿タイプ');
             $table->foreignId('account_id')->constrained('accounts')->comment('アカウントID');
-            $table->string('text', 255)->comment('投稿テキスト');
+            $table->text('text', 2048)->comment('投稿テキスト');
             $table->dateTime('limit_at', $precision = 0)->nullable();
             $table->dateTime('created_at', $precision = 0)->nullable();
             $table->dateTime('updated_at', $precision = 0)->nullable();

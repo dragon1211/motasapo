@@ -1,7 +1,8 @@
 import React from 'react';
 import ShopRandList from '../../../components/ShopRandList';
-import PostList from '../../../components/PostList';
+import PostList from './PostList';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import './index.css'
 
 const Post = () => {
     const queryClient = new QueryClient({
