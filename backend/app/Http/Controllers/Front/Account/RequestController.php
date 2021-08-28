@@ -16,14 +16,19 @@ class RequestController extends Controller
 
     public function index()
     {
-        return view('accounts.requests.index');
+        $current_id = Auth::id();
+        $type = DB::select("SELECT accounts.type FROM accounts WHERE accounts.id = ".$current_id);
+        if($type[0]->type == 0) {
+            return view('accounts.requests.index');
+        } else {
+            return view('accounts.requests.shop_index');
+        }
     } 
     
     public function newtype()
    {
        return view('accounts.requests.new_type'); 
    }
-
    public function new_vehicle()
    {
        return view('accounts.requests.new_vehicle');

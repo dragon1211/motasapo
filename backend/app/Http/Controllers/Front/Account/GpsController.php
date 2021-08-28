@@ -8,17 +8,109 @@ use App\Models\Location;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use App\Models\Post;
+use App\Models\Tag;
+use App\Models\PostTag;
+use App\Models\PostImage;
+use App\Models\PostLike;
+use App\Models\PostView;
+
+use Carbon\Carbon;
+
+
 class GpsController extends Controller
 {
     //
-    public function index()
-    {
-        # code...
-        return view('accounts.gpss.index');
+    public function index(){
+        return view('accounts.gpss.gps');
     }
 
-    public function detail($id){
-        return view('accounts.gpss.detail');
+    public function new(){
+        return view('accounts.gpss.new');
+    }
+
+    public function gpsShow(Request $request){
+
+        PostView::create(['account_id'=>Auth::id(), 'post_id'=>$request->id, 'token'=>'token', 'end_point'=>'endpoint']);
+
+        $post = Post::where('id', $request->id)->with('account')->with('postViews')->with('postImages')->get();
+        $res['post'] = $post[0];
+
+        $temp = DB::select("SELECT updated_at FROM posts WHERE id = ".(string)$request->id);
+
+        $from = Carbon::createFromFormat('Y-m-d H:i:s', $temp[0]->updated_at);
+        $to = now();
+        
+        $diff_in_min = $to->diffInMinutes($from); 
+
+        if($diff_in_min + 1 <60) 
+            $res['time'] = (string)($diff_in_min+1).'分前';
+        else{
+            $h = (int)($diff_in_min / 60) + 1;
+            $d = (int)($h / 24);
+            if( $d > 0 ) $res['time'] = (string)$d.'日前';
+            else $res['time'] = (string)$h.'時間前';
+        }
+
+        
+        return view('accounts.gpss.detail', $res);
+    }
+
+    
+
+    public function gpsStore(Request $request){
+        $tags = json_decode($request->get('tags'));
+        $post_msg = json_decode($request->get('post_msg'));
+        $limit_time = json_decode($request->get('limit_time'));
+
+        //---------------------------------save into posts table
+
+        Post::create([
+            'type'=> 1,
+            'account_id'=>Auth::id(),
+            'text'=>$post_msg,
+            'created_at'=> now(),
+            'updated_at'=> now(),
+            'limit_at'=> now()->addHour($limit_time)
+        ]);
+        $post_id = Post::all()->last()->id;
+
+        //----------------------------------save into tags & post_tags table
+        foreach($tags as $tag ){
+            $cnt = Tag::where('name',$tag->name)->count();
+            if($cnt==0) 
+                Tag::create(['name'=> $tag->name]);
+
+            //----------------------------------------------save post_tags tables
+            $tag_id = Tag::where('name', $tag->name)->first();
+            PostTag::create([
+                'post_id'=>$post_id, 
+                'tag_id'=>$tag_id->id
+            ]);
+        }
+
+        //----------------------------------save into post_images table-------image 
+        
+        $urls = [];
+        $path = 'images/post_images/';
+        if ($request->get('images')) {
+            foreach ($request->get('images') as $file) {
+                $name = time(). rand(1, 100) . '.' . explode('/', explode(':', substr($file, 0, strpos($file, ';')))[1])[1];
+                $replace = substr($file, 0, strpos($file, ',')+1); 
+                $image = str_replace($replace, '', $file); 
+                $image = str_replace(' ', '+', $image);     
+                \File::put(public_path($path). $name, base64_decode($image));
+                array_push($urls, '/'.$path.$name);
+            }
+        }
+        foreach( $urls as $url){
+            PostImage::create([
+                'post_id'=>$post_id,
+                'url' => $url
+            ]);
+        }
+        return 'success';
     }
 
     public function getPosition($strPos){
@@ -39,28 +131,10 @@ class GpsController extends Controller
         return $d;
     }
 
-    public function getTime($time){
-        $sp_arr = explode(' ', $time);
-        $semi_arr = explode(':', $sp_arr[1]);
-        return ($semi_arr[0].":".$semi_arr[1]);
-    }
-
-    public function getInterval($start, $end){
-        $temp1 = explode(' ', $start);
-        $temp2 = explode(' ', $end);
-        $start_arr = explode(':', $temp1[1]);
-        $end_arr = explode(':', $temp2[1]);
-        $res1 = (string)((int)$end_arr[0]-(int)$start_arr[0]);
-        $res2 = (string)((int)$end_arr[1]-(int)$start_arr[1]);
-        if(strlen($res1)<2) $res1 = '0'.$res1;
-        if(strlen($res2)<2) $res2 = '0'.$res2;
-        return ($res1.":".$res2);
-    }
-
     //-------------API----------------------
-    public function getdata(Request $request){
+    public function gpsIndex(Request $request){
 
-        $user_pos = $request->validate([
+        $cur_pos = $request->validate([
             'lat'=>'nullable',
             'lng'=>'nullable'
         ]);
@@ -81,159 +155,87 @@ class GpsController extends Controller
             ]);
         }
             
-        $user_id = Auth::id();
-        $cnt = Location::where('account_id', $user_id)->count();
-        $location = (string)$user_pos['lat'].', '.$user_pos['lng'];
+        $user_pos = (string)$cur_pos['lat'].', '.$cur_pos['lng'];
 
-        if($cnt==0){
+        if( Location::where('account_id', Auth::id())->count() == 0 ){
             $new = new Location;
-            $new->account_id = $user_id;
-            $new->location = $location;
+            $new->account_id = Auth::id();
+            $new->location = $user_pos;
             $new->save();
         }
         else{
-            Location::where(['account_id'=>$user_id])->first()->update([
-                'location'=> $location
+            Location::where(['account_id'=>Auth::id()])->first()->update([
+                'location'=> $user_pos
             ]);
         }
 
-        $total = DB::select(
-            "SELECT users.account_id, 
-            users.sex, 
-            locations.location,
-            accounts.name, 
-            accounts.profile, 
-            accounts.img  
-            FROM users, locations, accounts 
-            WHERE users.account_id = locations.account_id 
-            and locations.account_id = accounts.id");
+        $total = DB::select(    
+            "SELECT accounts.id as account_id, accounts.name, accounts.img, accounts.type as account_type,
+            users.sex, locations.location, posts.id as post_id, posts.type as post_type, 
+            posts.text as post_text, posts.limit_at, posts.created_at 
+            FROM posts, locations, users, accounts 
+            WHERE posts.account_id = locations.account_id  
+            AND posts.account_id = users.account_id  
+            AND posts.account_id = accounts.id 
+            AND posts.type = 1
+            ORDER BY posts.id DESC");
 
         $min_m_dis = 10000000;
         $min_w_dis = 10000000;
 
+        $users = array();
+
         foreach($total as $item){
-            $sql = "SELECT text, limit_at, updated_at FROM posts where id = ".$item->account_id." and account_id = ".$user_id;
-            $posts = DB::select($sql);
-            $post_arr = array();
-            foreach($posts as $post){
-                array_push($post_arr, $post);
-            }
-            if($item->account_id == $user_id) {
 
-                $user['id'] = $item->account_id;
-                $user['name'] = $item->name;
-                $user['type'] = "user";
-                $user['position'] = $user_pos;
-                $user['distance'] = 0;
-                // $user['started'] = $this->getTime($post_arr[0]->updated_at);
-                // $user['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
-                $user['started'] = "19:00";
-                $user['finished'] = "20:00";
-
-                $user['pic'] = $item->img;
-                $user['msgbox'] = [$item->profile];
-                continue;
-            }
-            $pos = $this->getPosition($item->location);
-            $dis = $this->distance($user_pos, $pos);
+            $limit = Carbon::createFromFormat('Y-m-d H:i:s', $item->limit_at);
+            $now = Carbon::createFromFormat('Y-m-d H:i:s', now());
+            if($limit->lt($now)) continue;
+  
             
-            if($item->sex == 'm'){
-                if($dis < $min_m_dis)
-                {
-                    $min_m_dis = $dis;
+            $temp['account_id'] = $item->account_id;
+            $temp['name'] = $item->name;
+            $temp['location'] = $this->getPosition($item->location);
 
-                    $male['id'] = $item->account_id;
-                    $male['name'] = $item->name;
-                    $male['type'] = "male";
-                    $male['position'] = $this->getPosition($item->location);
-                    $male['distance'] = floor($dis*1000);
-                    // $male['started'] = $this->getTime($post_arr[0]->updated_at);
-                    // $male['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
-                    $male['started'] = "19:00";
-                    $male['finished'] = "20:00";
+            if($item->sex == 'w')
+                 $temp['sex'] = 'female';
+            else $temp['sex'] = 'male';
 
-                    $male['pic'] = $item->img;
-                    $male['msgbox'] =[$item->profile];
-                }
-            }
-            else if($item->sex == 'w'){
-                if($dis < $min_w_dis)
-                {
-                    $min_w_dis = $dis;
+            if($item->account_type == '1')
+                  $temp['account_type'] = 'shop';
+            else  $temp['account_type'] = 'user';
+            
+            $temp['distance'] = floor(1000 * $this->distance($cur_pos, $temp['location']));
+            $temp['post_id'] = $item->post_id;
+            $temp['started'] = Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('H:i');
+            $temp['finished'] =  Carbon::createFromFormat('Y-m-d H:i:s', $item->limit_at)->format('H:i');
+            $temp['avatar'] = $item->img;
+            $temp['post_text'] = $item->post_text;
 
-                    $female['id'] = $item->account_id;
-                    $female['name'] = $item->name;
-                    $female['type'] = "female";
-                    $female['position'] = $this->getPosition($item->location);
-                    $female['distance'] = floor($dis*1000);
-                    // $female['started'] = $this->getTime($post_arr[0]->updated_at);;
-                    // $female['finished'] =  $this->getInterval($post_arr[0]->updated_at, $post_arr[0]->limit_at);
-                    $female['started'] = "19:00";
-                    $female['finished'] = "20:00";
+            if($temp['account_id'] == Auth::id()) 
+                $temp['is_current_user'] = true;
+            else $temp['is_current_user'] = false;
+            
 
-                    $female['pic'] = $item->img;
-                    $female['msgbox'] = [$item->profile];
-                }
-            }
+            array_push($users, $temp);
         }
 
+        $curUser['account_id'] = Auth::id();
+        $curUser['name'] = '';
+        $curUser['location'] = $cur_pos;
+        $curUser['sex'] = '';
+        $curUser['account_type'] = '';
+        $curUser['distance'] = 0;
+        $curUser['post_id'] = -100;
+        $curUser['started'] = '';
+        $curUser['finished'] =  '';
+        $curUser['avatar'] = '';
+        $curUser['post_text'] = '';
+        $curUser['is_current_user'] = true;
+
+        array_push($users, $curUser);
+
+        $response = $users;
         
-       
-        $test_data = array($user, $male, $female,
-            [
-                'id'=>25,
-                'name'=> 'shop.miyama',
-                'type'=> 'shop',
-                'position'=> $shop[0],
-                'distance'=> 90,
-                'finished'=> '13:00',
-                'started'=> '14:00',
-                'pic'=> '/storage/base/myphoto.jpg',
-                'msgbox'=> [
-                     '私はバイクが大好きで、関東近辺でよく走っています！ 近場で走っている人がいたら、是非声をかけてください！ ツーリングはいつでも参加します！' 
-                ]
-            ],
-            [
-                'id'=>26,
-                'name'=> 'shop.miyama',
-                'type'=> 'shop',
-                'position'=> $shop[1],
-                'distance'=> 90,
-                'finished'=> '11:18',
-                'started'=> '18:10',
-                'pic'=> '/storage/base/sample-human2.png',
-                'msgbox'=> [
-                     '私はバイクが大好きで、関東近辺でよく走っています！ 近場で走っている人がいたら、是非声をかけてください！ ツーリングはいつでも参加します！' 
-                ]
-            ],
-            [
-                'id'=>27,
-                'name'=> 'shop.miyama',
-                'type'=> 'shop',
-                'position'=> $shop[2],
-                'distance'=> 90,
-                'finished'=> '11:18',
-                'started'=> '18:10',
-                'pic'=> '/storage/base/sample-human2.png',
-                'msgbox'=> [
-                     '私はバイクが大好きで、関東近辺でよく走っています！ 近場で走っている人がいたら、是非声をかけてください！ ツーリングはいつでも参加します！' 
-                ]
-            ],
-            [
-                'id'=>28,
-                'name'=> 'shop.miyama',
-                'type'=> 'shop',
-                'position'=> $shop[3],
-                'distance'=> 90,
-                'finished'=> '11:18',
-                'started'=> '18:10',
-                'pic'=> '/storage/base/sample-human2.png',
-                'msgbox'=> [
-                     '私はバイクが大好きで、関東近辺でよく走っています！ 近場で走っている人がいたら、是非声をかけてください！ ツーリングはいつでも参加します！' 
-                ]
-            ]
-        );
-        
-        return $test_data;
+        return $response;
     }
 }

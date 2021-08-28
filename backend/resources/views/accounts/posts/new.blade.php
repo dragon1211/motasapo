@@ -1,6 +1,6 @@
-@extends('accounts.gpss.html')
+@extends('accounts.posts.index')
 
-@section('title', '投稿一覧')
+@section('title', 'New')
 @section('pageCss')
 @section('h1', 'LOGO')
 @endsection

@@ -22,6 +22,7 @@
         "@types/react-alert": "^5.2.1",
         "@types/react-dom": "^17.0.8",
         "@types/react-router-dom": "^5.1.7",
+        "@types/react-select": "^4.0.17",
         "alpinejs": "^2.7.3",
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
@@ -59,6 +60,7 @@
         "react-alert-template-basic": "^1.0.2",
         "react-bootstrap": "^1.6.1",
         "react-mentions": "^4.3.0",
+        "react-select": "^4.3.1",
         "react-tag-autocomplete": "^6.2.0"
     }
 }

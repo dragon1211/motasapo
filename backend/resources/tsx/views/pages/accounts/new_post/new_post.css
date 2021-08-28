@@ -1,5 +1,5 @@
 .new-body{
-    padding: 70px 24px 10px;
+    padding: 53px 16px 0;
     font-size: 1em;
 }
 
@@ -7,8 +7,9 @@
     width: 100% !important;
     border-radius: 5px !important;
     text-align: center !important;
-    min-height: 45px !important;
-    font-size: 1.2rem!important;
+    height: 40px;
+    min-height: 40px !important;
+    font-size: 1rem!important;
     color: white!important;
 }
 .addPic-btn{
@@ -18,11 +19,11 @@
 .addPic-btn:after {
     content: "\002B";
     color: white;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 .collect-btn{
+    z-index: 0;
     background-color: black!important;
-    min-width: 64px;
     box-sizing: border-box;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
@@ -30,11 +31,10 @@
 .collect-btn:focus{
     opacity: .9;
     transition: 0.3s
-   
 }
 
 .p-20{
-    padding: 15px 0;
+    margin: 15px 0 0;
 }
 
 .msg-input{
@@ -54,4 +54,8 @@
 .post-text{
     font-size: inherit !important;
     font-weight: bold !important;
+}
+
+.react-tags{
+    z-index: 1;
 }

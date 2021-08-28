@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 import {Post} from '../../../../types/entity/Post';
 import axios from 'axios';
 import {Button} from '@material-ui/core'
 import './index.css'
+import {PageLoader} from '../../../components/PageLoader';
 
 interface Thanks{
     flag: boolean
@@ -181,7 +182,11 @@ class PostList extends React.Component<Props,State>{
     render(){
         const { classes } = this.props;
         if(this.state.status === ''){
-            return <div className="u-align__center">データの読み込み中...</div>
+            return( 
+            <>
+                <PageLoader />
+                <div className="u-align__center">データの読み込み中...</div>
+            </>)
         }
         else if(this.state.status === 'error') {
             return <div className="u-align__center">データの読み込みに失敗しました。</div>
@@ -283,6 +288,7 @@ class PostList extends React.Component<Props,State>{
                         )
                     })
                 }
+                
             </>
         )
     }

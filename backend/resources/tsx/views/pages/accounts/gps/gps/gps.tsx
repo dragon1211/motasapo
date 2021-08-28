@@ -7,7 +7,10 @@ import {Header} from '../../../../layout/Header';
 import './gps.css';
 import './loader.css';
 import { Link } from 'react-router-dom';
-import {Grid, Button} from '@material-ui/core'
+import {Grid, Button} from '@material-ui/core';
+
+import {PageLoader} from '../../../../components/PageLoader';
+
 
 type State={
     total_data: Array<PersonData>
@@ -51,7 +54,6 @@ export class GPS extends Component<{}, State> {
         this.handleResize()
     }
 
-
     getData =  () =>{
         if(this._isMounted){
             navigator.geolocation.getCurrentPosition(position => {
@@ -64,11 +66,12 @@ export class GPS extends Component<{}, State> {
                 axios.post('/account/gps/api', curPos)
                 .then(response=>{
                     var res = (response.data); 
+                    
                     this.setState({
                         total_data : [...res],
-                        filter_data: [...res],
                         status: 'loaded'
                     })
+                    this.selectAll();
                 }).catch(err=>{
                     this.setState({status: 'failed'});
                 })
@@ -78,37 +81,40 @@ export class GPS extends Component<{}, State> {
 
     selectAll(){
         var items = [];
-        for(var i=0; i < this.state.total_data.length; i++) items.push(this.state.total_data[i]);
+        for(var i=0; i < this.state.total_data.length; i++) 
+            if(this.state.total_data[i].post_id >= 0) items.push(this.state.total_data[i]);
         this.setState({ filter_data: [...items], isSelected : 'all' })
     }
 
     selectShop(){
         var items = [];
         for(var i=0; i < this.state.total_data.length; i++)
-            if(this.state.total_data[i].type == "shop") items.push(this.state.total_data[i]);
+            if(this.state.total_data[i].account_type == "shop") items.push(this.state.total_data[i]);
         this.setState({ filter_data: [...items], isSelected : 'shop' })
+    }
+
+    selectUser(){
+        var items = [];
+        for(var i=0; i < this.state.total_data.length; i++)
+            if(this.state.total_data[i].account_type == "user")           
+                items.push(this.state.total_data[i]);
+            this.setState({ filter_data: [...items], isSelected : 'user' })
     }
 
     selectFemale(){
         var items = [];
         for(var i=0; i < this.state.total_data.length; i++)
-            if(this.state.total_data[i].type == "female") items.push(this.state.total_data[i]);  
+            if(this.state.total_data[i].account_type == "user" 
+            && this.state.total_data[i].sex == "female") items.push(this.state.total_data[i]);  
         this.setState({ filter_data: [...items], isSelected : 'female' })
     }
 
     selectMale(){
         var items = [];
         for(var i=0; i<this.state.total_data.length; i++)
-            if(this.state.total_data[i].type == "male")  items.push(this.state.total_data[i]);
+        if(this.state.total_data[i].account_type == "user" 
+        && this.state.total_data[i].sex == "male") items.push(this.state.total_data[i]); 
         this.setState({ filter_data: [...items], isSelected : 'male' })
-    }
-
-    selectUser(){
-        var items = [];
-        for(var i=0; i < this.state.total_data.length; i++)
-            if(this.state.total_data[i].type == "user")           
-                items.push(this.state.total_data[i]);
-            this.setState({ filter_data: [...items], isSelected : 'user' })
     }
 
     handleResize = () => {
@@ -122,40 +128,44 @@ export class GPS extends Component<{}, State> {
         return (
             <div>
                 <Header title="GPS"/>
-                    <div className="gps-body">
+                { this.state.status == '' && <PageLoader /> }
+                <div className="gps-body">
                         <div style={{width:`${this.state.map_width}`, height: `${this.state.map_height}`}}>
-                            <Map markers={this.state.total_data}/>
+                        {
+                                this.state.status == 'loaded' ? 
+                                    <Map markers={this.state.total_data}/>:null
+                        }
                         </div>
                         <div className="wrap-info">
                             <Grid container spacing={1} alignItems={'center'} justifyContent={'center'}>
-                                <Grid container item sm={12} spacing={1} >
-                                    <Grid item sm={4} xs={12}>
+                                <Grid container item  spacing={1} >
+                                    <Grid item sm={4} xs={4}>
                                         {
                                             this.state.isSelected == 'all' ? <Button className="round-btn selected"  onClick={e=>this.selectAll()}>全て</Button>
                                             : <Button className="round-btn"  onClick={e=>this.selectAll()}>全て</Button>
                                         }
                                     </Grid>
-                                    <Grid item sm={4} xs={12} >
+                                    <Grid item sm={4} xs={4} >
                                         {
                                             this.state.isSelected == 'shop' ?   <Button className="round-btn selected"  onClick={e=>this.selectShop()}>ショップのみ</Button>
                                             :  <Button className="round-btn"  onClick={e=>this.selectShop()}>ショップのみ</Button>
                                         }
                                     </Grid>
-                                    <Grid item sm={4} xs={12} >
+                                    <Grid item sm={4} xs={4} >
                                         {
                                             this.state.isSelected == 'user' ?   <Button className="round-btn selected"  onClick={e=>this.selectUser()}>ユーザー</Button>
                                             :  <Button className="round-btn"  onClick={e=>this.selectUser()}>ユーザー</Button>
                                         }
                                     </Grid>
                                 </Grid>
-                                <Grid container item sm={12} spacing={1}>
-                                    <Grid item sm={6} xs={12}>
+                                <Grid container item  spacing={1}>
+                                    <Grid item xs={6}>
                                         {
                                             this.state.isSelected == 'male' ? <Button className="round-btn selected"  onClick={e=>this.selectMale()}>ユーザー：男性のみ</Button>
                                             :  <Button className="round-btn"  onClick={e=>this.selectMale()}>ユーザー：男性のみ</Button>
                                         }
                                     </Grid>
-                                    <Grid item sm={6} xs={12}>
+                                    <Grid item xs={6}>
                                         {
                                             this.state.isSelected == 'female' ? <Button className="round-btn selected"  onClick={e=>this.selectFemale()}>ユーザー：女性のみ</Button>
                                             : <Button className="round-btn"  onClick={e=>this.selectFemale()}>ユーザー：女性のみ</Button>
@@ -164,21 +174,28 @@ export class GPS extends Component<{}, State> {
                                 </Grid>
                             </Grid>
                             {
-                                this.state.status == 'loaded' ? 
-                                    this.state.filter_data.map( (item:any, id:any) =><PersonInfo data = {item} key={id}/> )  
-                                :  <div className="gps-body"><div className="u-align__center">データが存在していません。</div></div>                                                  
+                                this.state.status != 'loaded' ? <div className="gps-body"><div className="u-align__center">データが存在していません。</div></div>                                           
+                                :(
+                                    this.state.filter_data.length != 0 ?                               
+                                    this.state.filter_data.map((item:any, id:any) => 
+                                    {
+                                        if(item.post_id < 0)   return null;
+                                        return <PersonInfo data = {item} key={id}/>
+                                    })
+                                    :<div className="gps-body"><div className="u-align__center">データが存在していません。</div></div>
+                                )                                                 
                             }
                         </div>
 
-                        <div className="l-nav gps">
+                        <div className="l-nav" style={{paddingBottom:'0px', textAlign:'center'}}>
                             <Grid container item>
                                 <Grid item sm={6} xs={6} className="l-nav--item is-selected">
-                                    <a href="" className="l-nav--link-gps">
+                                    <a href="#" className="l-nav--link-gps">
                                         <span>G P S</span>
                                     </a>
                                 </Grid>
                                 <Grid item sm={6} xs={6} className="l-nav--item">
-                                    <a className="l-nav--link-gps">
+                                    <a href="/account/gps/new" className="l-nav--link-gps">
                                         募集する
                                     </a>
                                 </Grid>
