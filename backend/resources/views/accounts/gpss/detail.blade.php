@@ -1,4 +1,4 @@
-@extends('accounts.gpss.html')
+@extends('accounts.gpss.index')
 
 @section('title', '投稿一覧')
 @section('pageCss')
@@ -15,8 +15,7 @@
 @endpush
 
 {{-- 本文 --}}
-@include('layouts.header-account')
 @section('content')
-    <div id="detail"></div>
+    <div id="detail" data-post="{{ $post }}" data-time="{{$time}}"></div>
 @endsection
 @include('layouts.footer')

@@ -14,6 +14,10 @@ import FilterNoneIcon from '@material-ui/icons/FilterNone';
 import { isError } from 'react-query';
 import axios from 'axios';
 
+import {PageLoader} from '../../../components/PageLoader';
+
+
+
 const StyledMenuItem = withStyles((theme) => ({
     root: {
         '&:focus': {
@@ -32,6 +36,7 @@ type State={
     first_img_src:any | undefined
     upload_images:any| undefined
     post_msg:any | undefined
+    submited: boolean
 }
 
 export class New_Post extends React.Component<{},State> {
@@ -45,6 +50,7 @@ export class New_Post extends React.Component<{},State> {
             first_img_src: undefined,
             upload_images: [],
             post_msg: '',
+            submited: false
         };
     }
 
@@ -84,10 +90,10 @@ export class New_Post extends React.Component<{},State> {
     image_upload_button = ( ) =>(
         <Grid container item xs={12}>
             <Grid item sm={2} xs={3} style={{width:'70px', height:'70px'}}>
-                <img src={this.state.first_img_src} style={{width: '100%',  height: '100%',  objectFit: 'contain', backgroundColor:'#eeeedd'}}/>
+                <img src={this.state.first_img_src} style={{width: '100%',  height: '100%',  objectFit: 'contain'}}/>
             </Grid>
             <Grid item sm={10} xs={9}>
-                <div className="pl-2" style={{paddingTop:'11px'}}>
+                <div className="pl-2" style={{paddingTop:'15px'}}>
                     {this.dropdown_menu_button()}
                 </div>
             </Grid>
@@ -152,25 +158,34 @@ export class New_Post extends React.Component<{},State> {
 
     handleSubmit = (e:any) => {
         e.preventDefault();
-        const formdata = new FormData();
-        formdata.append('tags', JSON.stringify(this.state.tags));
-        formdata.append('post_msg', JSON.stringify(this.state.post_msg));
-
-        this.state.upload_images.forEach((image_file:any) => {
-            formdata.append('images[]', image_file);
-        });
-
-        axios.post('/account/new_post/store', formdata)
-        .then(response => {
-            if(response.data=="success"){
-                window.location.href = '/account/post';
-            }
-        })
+        if(!this.state.submited)
+        {
+            this.setState({submited: true});
+            const formdata = new FormData();
+            formdata.append('tags', JSON.stringify(this.state.tags));
+            formdata.append('post_msg', JSON.stringify(this.state.post_msg));
+    
+            this.state.upload_images.forEach((image_file:any) => {
+                formdata.append('images[]', image_file);
+            });
+            
+            axios.post('/account/new_post/store', formdata)
+            .then(response => {
+                if(response.data=="success"){
+                    window.location.href = '/account/post';
+                    this.setState({submited: false})
+                }
+            })
+        }
     }
     render() {
+       
         return (
         <>
             <Header title="LOGO"/>
+            {
+               this.state.submited && <PageLoader />
+            }
             <div className="new-body">
                 <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
                     <div className="p-20">
@@ -189,7 +204,7 @@ export class New_Post extends React.Component<{},State> {
                         onAddition={this.handleAddition.bind(this)}/>
                     </div>
                     <div className="p-20">
-                        <button type="submit" className="collect-btn" >投稿する</button>
+                        <Button type="submit" className="collect-btn">投稿する</Button>
                     </div>
                 </form>
             </div>

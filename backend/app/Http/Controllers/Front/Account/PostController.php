@@ -38,7 +38,7 @@ class PostController extends Controller
 
         //---------------------------------save into posts table
         Post::create([
-            'type'=>Account::where('id', Auth::id())->first()->type,
+            'type'=> 0,
             'account_id'=>Auth::id(),
             'text'=>$post_msg,
             'limit_at'=> now()
@@ -62,7 +62,11 @@ class PostController extends Controller
         //----------------------------------save into post_images table-------image 
         
         $urls = [];
+        
         $path = 'images/post_images/';
+        if (!file_exists(public_path($path))) {
+            mkdir(public_path($path), 0777, true);
+        }
         if ($request->get('images')) {
             foreach ($request->get('images') as $file) {
                 $name = time(). rand(1, 100) . '.' . explode('/', explode(':', substr($file, 0, strpos($file, ';')))[1])[1];

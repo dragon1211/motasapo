@@ -45,7 +45,7 @@ export const MyPageIndex =() => {
                         <div className="btnBox">
                             <div className="row">
                                 <div className="col-sm-4">
-                                    <button className="round-btn">プロフィール編集</button>
+                                <Link to="/account/request/profile/"><button className="round-btn">プロフィール編集</button></Link>
                                 </div>
                                 <div className="col-sm-4">
                                     <button className="round-btn">ロードサービス</button>

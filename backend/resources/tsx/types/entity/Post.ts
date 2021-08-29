@@ -10,5 +10,6 @@ export type Post = {
     post_images: Array<any>
     post_likes: Array<any>
     post_tags: Array<any>
+    post_views: Array<any>
     account: any
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { GoogleMap, InfoWindow, Marker, useLoadScript } from "@react-google-maps/api";
 import { PersonData } from "./personInfo";
+import { NavItem } from "react-bootstrap";
 
 type Props = {
     markers: Array<PersonData>
@@ -28,7 +29,7 @@ const MyMap:React.FC<Props> = (props)=>{
 
   const handleOnLoad = (map:any) => {
     const bounds = new google.maps.LatLngBounds();
-    markers.forEach(({ position }) => bounds.extend(position));
+    markers.forEach(({ location }) => bounds.extend(location));
     map.fitBounds(bounds);
   };
 
@@ -39,20 +40,32 @@ const MyMap:React.FC<Props> = (props)=>{
       mapContainerStyle={{ width: "100%", height: "100%" }}>
         {
        
-        markers.map(({ id, name, type, position }) => {
+        markers.map(({ name, account_type, sex,post_id, is_current_user, location }, id) => {
           var image;
-          switch(type)
-          {
-             case "male": image = '/storage/base/icon-pin-blue.png'; break;
-             case "female": image = '/storage/base/icon-pin-red.png'; break;
-             case "user": image = '/storage/base/icon-pin-black.png'; break;
-             case "shop": image = '/storage/base/icon-shop.png'; break;
-             default: return;
+          if(post_id < 0){
+             image = '/storage/base/icon-pin-black.png';
           }
+          else {
+              if(account_type == 'shop'){
+                image = '/storage/base/icon-shop.png'; 
+              }
+              else if(account_type == 'user'){
+                  switch(sex)
+                  {
+                    case "male": image = '/storage/base/icon-pin-blue.png'; break;
+                    case "female": image = '/storage/base/icon-pin-red.png'; break;
+                    default: return;
+                  }
+              }
+              else image = '';
+              
+              if(is_current_user)  image = '/storage/base/icon-pin-black.png';
+          }
+
           return(
             <Marker
                 key={id}
-                position={position}
+                position={location}
                 icon={image}
                 onClick={() => handleActiveMarker(id)}>
                 {activeMarker === id ? (

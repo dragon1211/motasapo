@@ -11,6 +11,7 @@ use App\Http\Controllers\Front\Account\GpsController;
 use App\Http\Controllers\Front\Account\LoginController as AccountLoginController;
 use App\Http\Controllers\Front\Account\MypageController;
 use App\Http\Controllers\Front\Account\RequestController;
+use App\Http\Controllers\Front\Account\ProfileController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\Front\Admin\LoginController;
 use App\Http\Controllers\Front\Admin\ManagerController;
@@ -100,8 +101,10 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('account')->name('accoun
     Route::post('/post/thanks', [PostController::class, 'thanks_store']);
 
     Route::get('/gps', [GpsController::class, 'index']);
-    Route::get('/gps/detail/{id}', [GpsController::class, 'detail']);
-    Route::post('/gps/api', [GpsController::class, 'getdata']);
+    Route::get('/gps/detail/{id}', [GpsController::class, 'gpsShow']);
+    Route::get('/gps/new', [GpsController::class, 'new']);
+    Route::post('/gps/new/store', [GpsController::class, 'gpsStore']);
+    Route::post('/gps/api', [GpsController::class, 'gpsIndex']);
     
     // チャットルームのページを返却
     Route::get('/chatroom', function() {
@@ -121,6 +124,28 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('account')->name('accoun
     Route::post('/chat/sendImage', 'MessageController@SendImage');
     Route::get('/mypage', [RequestController::class,'index']);
     Route::get('/request/new/type', [RequestController::class,'newtype']);
+
+    /** Profile Edit route */
+    Route::get('/request/profile', [ProfileController::class,'profile_index']);
+    Route::get('/request/image_edit', [ProfileController::class,'profile_image']);
+    Route::get('/request/shop_image_edit', [ProfileController::class,'shop_image']);
+    Route::get('/request/profile_account', [ProfileController::class,'accountProfile']);
+    Route::get('/request/pass_edit', [ProfileController::class,'passEditShow']);
+    Route::get('/request/shopPass_edit', [ProfileController::class,'ShopPassEditShow']);
+    Route::get('/request/shop_profile', [ProfileController::class,'shopProfileShow']);
+    Route::get('/request/shop_profielEdit', [ProfileController::class,'shopProfileEdit']);
+    Route::get('/request/profilePage-cancel', [ProfileController::class,'ProfilePageCancel']);
+    Route::get('/request/shopProfilePage-cancel', [ProfileController::class,'ShopProfilePageCancel']);
+    Route::post('/profile/imgStore', [ProfileController::class,'profileImageStore']);
+    Route::post('/request/profiledata', [ProfileController::class,'getProfileData']);
+    Route::post('/profile/account_edit', [ProfileController::class,'accountEdit']);
+    Route::post('/profile/pass_update', [ProfileController::class,'userPassUpdate']);
+    Route::post('/profile/shopPass_update', [ProfileController::class,'ShopPassUpdate']);
+    Route::post('/request/shopProfiledata', [ProfileController::class,'getShopProfileData']);
+    Route::post('/profile/shopProfile_update', [ProfileController::class,'shopProfileUpdate']);
+    Route::post('/profile/account_cancel', [ProfileController::class,'AccountCancel']);
+
+    /** */
     Route::get('/request/new/vehicle', [RequestController::class,'new_vehicle']);
     Route::get('/request/new/image', [RequestController::class,'new_image']);
     Route::post('/request/new/uploadimages', [RequestController::class,'uploadimages']);

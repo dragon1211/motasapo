@@ -16,9 +16,8 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $res["posts"] = Post::orderBy('id', 'DESC')->with('account')->with('postImages')->with('postTags')->with('postLikes')->with('postViews')->limit(10)->offset((int)$request->offset)->get();
-        $res["user_id"] = Auth::id();
-        return $res;
+        $post = Post::orderBy('id', 'DESC')->with('postImages')->with('postTags')->with('postLikes')->with('postViews')->limit(10)->offset((int)$request->offset)->get();
+        return $post;
     }
 
     /**

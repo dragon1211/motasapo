@@ -270,6 +270,14 @@ width: 110px;
     top:0;
 }
 
+#shoprequest .nav-top{
+    top:0;
+}
+
 #request{
+    padding-top: 70px;
+}
+
+#shoprequest{
     padding-top: 70px;
 }

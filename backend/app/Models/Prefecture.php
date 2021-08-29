@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Prefecture extends Model
 {
     use HasFactory;
-    
+    protected $table = 'prefectures';
+    protected $fillable = [
+        'name',
+    ];
 
 
     public function getAll()
