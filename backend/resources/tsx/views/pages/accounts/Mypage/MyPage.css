@@ -172,6 +172,7 @@ width: 110px;
 } */
 
 .image-preview{
+    right: 0px;
     position :absolute;
     width: 101px;
     height: 101px;

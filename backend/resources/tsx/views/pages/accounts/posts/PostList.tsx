@@ -208,10 +208,10 @@ class PostList extends React.Component<Props,State>{
                                         <div className="icon-image c-img__cover c-img--icon is-circle u-mr10">
                                         {
                                             post.account.img == '' ?  <img src="/storage/base/person.png" alt="/storage/base/person.png" />
-                                            : <img src={post.account.img} alt={post.account.img} />
+                                            : <a href={`/account/profile/${post.account_id}`}><img src={post.account.img} alt={post.account.img} /></a>
                                         }
                                         </div>
-                                        <p className="icon-name">{post.account.name}</p>
+                                        <a href={`/account/profile/${post.account_id}`}><p className="icon-name">{post.account.name}</p></a>
                                     </div>
                                     {recruit_mark}
                                 </div>
