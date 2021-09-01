@@ -46,7 +46,7 @@ Product customer testimonials and message between customers function know the ne
     <li>...</li>
 </ul> -->
 <h3>[motasapo_home.png]</h3>
-<img src="./info/motasapo_home.png" width="370px" height="760px"/>
+<img src="./info/motasapo_home.PNG" width="370px" height="760px"/>
 <hr>
 
 <h3>[motasapo_login.png]</h3>
