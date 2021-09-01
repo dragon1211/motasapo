@@ -27,10 +27,10 @@ const ShopRandList: React.VFC = () => {
             { shops.map((shop) => {
                 return (
                     <li key={shop.id} className="p-list--shop__rand--item">
-                        <a href={`/shop/profile/${shop.id}`}>
+                        <a href={`/account/profile/${shop.account_id}`}>
                             <div className="c-img--cover c-img--icon">
-                                <img src="/storage/base/logo-square.png" alt="モタサポのロゴ" />
-                                {/* <img src={shop.account.img} alt="モタサポのロゴ" /> */}
+                                {/* <img src="/storage/base/logo-square.png" alt="モタサポのロゴ" /> */}
+                                <img src={shop.account.img} alt="モタサポのロゴ" />
                             </div>
                             <p className="rand-text">{shop.account.account}</p>
                         </a>

@@ -20,6 +20,9 @@ class Shop extends Model
         'url',
         'detail',
         'hour',
+        'post',
+        'address1',
+        'address2',
     ];
     /**
      * リレーション設定

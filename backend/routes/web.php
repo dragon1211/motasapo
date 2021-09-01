@@ -8,6 +8,7 @@ use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Front\CommonController;
 use App\Http\Controllers\Front\Account\PostController;
 use App\Http\Controllers\Front\Account\GpsController;
+use App\Http\Controllers\Front\Account\MessageController;
 use App\Http\Controllers\Front\Account\LoginController as AccountLoginController;
 use App\Http\Controllers\Front\Account\MypageController;
 use App\Http\Controllers\Front\Account\RequestController;
@@ -94,6 +95,13 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('account')->name('accoun
     Route::get('/post', function() {
         return view('accounts.index');
     });
+
+    //profileについて
+    Route::get('/profile/{id}', [ProfileController::class, 'index']);
+    Route::get('/profile/data/account', [ProfileController::class, 'get_data']);
+
+    Route::get('/follow', [ProfileController::class, 'follow']);
+
     Route::get('/api/posts', [PostController::class, 'index']);
     Route::get('/new_post', [PostController::class, 'post_new']);
     Route::post('/new_post/store', [PostController::class, 'post_store']);
@@ -116,13 +124,18 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('account')->name('accoun
     Route::get('/id', 'ChatroomController@AccountIdRead');
 
     // Messagesについて
+
+    Route::get('/message', [MessageController::class,'index']);
+
     Route::get('/chat/{room_id}/{id}', 'MessageController@MessageRead');
     Route::get('/user/{id}', 'MessageController@getUser');
     Route::get('/myself/{id}', 'MessageController@getMyself');
 
     Route::post('/chat/sendMessage', 'MessageController@SendMessage');
     Route::post('/chat/sendImage', 'MessageController@SendImage');
-    Route::get('/mypage', [RequestController::class,'index']);
+    Route::get('/mypage', [MypageController::class,'index']);
+    Route::get('/Mypage_data', [MypageController::class,'Mypage_data']);
+    
     Route::get('/request/new/type', [RequestController::class,'newtype']);
 
     /** Profile Edit route */

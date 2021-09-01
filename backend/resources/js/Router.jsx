@@ -12,7 +12,7 @@ const Router = () => {
             <Route path="/account/chatroom" component={Chatrooms} />
             <Route path="/account/:user1/chat/:id/:user2" component={ChatMessages} />
 
-            <Route path="/shop/profile/:id" children={<Profile />} />
+            <Route path="/account/profile/:id" component={Profile} />
         </Switch>
     )
 }

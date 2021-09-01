@@ -38,6 +38,7 @@ class RequestController extends Controller
    {
        return view('accounts.requests.new_image');
    }
+   
    public function uploadimages(Request $request)
    {
     $new_images = json_decode($request->input('images'));

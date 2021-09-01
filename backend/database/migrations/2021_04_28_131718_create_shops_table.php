@@ -20,6 +20,9 @@ class CreateShopsTable extends Migration
             $table->string('url', 255)->nullable()->comment('URL');
             $table->string('detail', 1000)->nullable()->comment('詳細');
             $table->string('hour', 1000)->nullable()->comment('営業時間・休日');
+            $table->string('post', 7)->nullable()->comment('郵便番号');
+            $table->string('address1', 255)->nullable()->comment('住所1');
+            $table->string('address2', 255)->nullable()->comment('住所2');
             $table->dateTime('created_at', $precision = 0)->nullable();
             $table->dateTime('updated_at', $precision = 0)->nullable();
         });

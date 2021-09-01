@@ -11,6 +11,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import DefApp from './DefApp';
 import { BrowserRouter } from 'react-router-dom';
+import Router from '../js/Router'
+import  {Header} from '../tsx/views/layout/Header';
 
 if (document.getElementById('app')) {
     ReactDOM.render(
@@ -20,6 +22,18 @@ if (document.getElementById('app')) {
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('app')
+    );
+}
+
+if (document.getElementById('profile')) {
+    ReactDOM.render(
+        <React.StrictMode>
+            <BrowserRouter>
+            <Header title="LOGO"/>
+                <Router />
+            </BrowserRouter>
+        </React.StrictMode>,
+        document.getElementById('profile')
     );
 }
 

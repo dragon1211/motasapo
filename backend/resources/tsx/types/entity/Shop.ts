@@ -15,5 +15,6 @@ export type Shop = {
         type: string;
         name: string;
         profile: string;
+        img: string;
     }
 };
